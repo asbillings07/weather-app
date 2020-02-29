@@ -4,9 +4,9 @@ const Store = createContext()
 
 function Provider ({ children }) {
   const value = {
-    // place value in here
+    name: 'Aaron Billings'
   }
-  return <Store.Provder value={value}>{children}</Store.Provder>
+  return <Store.Provider value={value}>{children}</Store.Provider>
 }
 
 /* allows use of State without needing to repeat useContext hook,
