@@ -2,7 +2,7 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { useStore } from './Store'
-function App() {
+function App () {
   const store = useStore()
   return (
     <div className='App'>
