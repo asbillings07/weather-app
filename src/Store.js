@@ -9,7 +9,6 @@ function Provider({ children }) {
   const [weatherData, setWeatherData] = useState(loadState())
   const fetchWeather = useCallback(async () => {
     const res = await axios.get(apiUrl)
-    console.log(res)
     if (res.data === weatherData) {
       return
     } else {
@@ -21,7 +20,6 @@ function Provider({ children }) {
   useEffect(() => {
     fetchWeather()
   }, [])
-  console.log(weatherData)
 
   const value = {
     name: 'Aaron Billings',

@@ -1,4 +1,4 @@
-import art_clear from '../../images/art_clear@3x.png'
+import art_clear from '../../images/art_clear.png'
 import art_clouds from '../../images/art_clouds.png'
 import art_light_clouds from '../../images/art_light_clouds.png'
 import art_fog from '../../images/art_fog.png'
