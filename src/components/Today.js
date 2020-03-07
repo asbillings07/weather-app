@@ -9,8 +9,10 @@ import { WeatherHome } from '../pages/WeatherHome'
 const Container = styled.div`
   background-color: #03a9fa;
   display: flex;
-  padding: 25px;
+  padding: 25px 0px;
+  padding-left: 168px;
 `
+const WeatherTemps = styled.div``
 const TodayDate = styled(Typography)`
   font-size: 50px;
   color: #fff;
@@ -23,24 +25,20 @@ const MinDegrees = styled(Typography)`
   font-size: 7em;
   color: #fff;
 `
-const Forcast = styled(Typography)`
-  font-size: 5em;
-  color: #fff;
+const WeatherForcast = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 const WeatherIcon = styled.img`
   height: 25em;
   width: 25em;
 `
-const WeatherTemps = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+const Forcast = styled(Typography)`
+  font-size: 5em;
+  color: #fff;
+  align-self: center;
 `
-const WeatherForcast = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`
+
 export const Today = () => {
   const { data } = useStore()
 
