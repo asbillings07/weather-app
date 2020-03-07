@@ -5,9 +5,34 @@ import App from './App'
 import { Provider } from './Store'
 import * as serviceWorker from './serviceWorker'
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { CssBaseline } from '@material-ui/core'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#03A9FA',
+      main: '#03A9FA',
+      dark: '#1a237e',
+      contrastText: '#fff'
+    },
+    secondary: {
+      light: '#fdd835',
+      main: '#646464',
+      dark: '#ff8f00',
+      contrastText: '#000'
+    },
+    common: { black: '#000', white: '#fff' },
+    grey: { light: '#f5f5f5', main: '#e3e3e3' }
+  }
+})
+
 ReactDOM.render(
   <Provider>
-    <App />
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 )
