@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "_encrypt": "npx staticrypt public/index.html Warn3rM3d1a -o public/index.html"
   },
   "eslintConfig": {
     "extends": "react-app"

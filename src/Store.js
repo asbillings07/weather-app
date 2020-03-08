@@ -1,28 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
-import axios from 'axios'
 import { apiUrl } from './config'
 import { loadState, saveState } from './localStorage'
+import { api } from './request'
 const Store = createContext()
 
 function Provider({ children }) {
   const [weatherData, setWeatherData] = useState(loadState())
-  const fetchWeather = useCallback(async () => {
-    const res = await axios.get(apiUrl)
-    if (res.data === weatherData) {
-      return
-    } else {
-      saveState(res.data)
-      setWeatherData(res.data)
-    }
-  }, [weatherData])
+  console.log('In Provider')
 
   useEffect(() => {
+    console.log('Running...')
     fetchWeather()
   }, [])
 
+  const fetchWeather = useCallback(async () => {
+    console.log('Getting in here')
+    if (!weatherData) {
+      const res = await api(apiUrl)
+      saveState(res.data)
+      setWeatherData(res.data)
+    } else {
+      return
+    }
+  }, [weatherData])
+
   const value = {
-    name: 'Aaron Billings',
     data: weatherData
   }
 

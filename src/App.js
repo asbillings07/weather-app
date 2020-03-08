@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
 import { WeatherHome } from './pages/WeatherHome'
 import { WeatherDetails } from './pages/WeatherDetail'
-export default function App() {
+
+export const App = () => {
   return (
     <Router>
       <NavBar title='Sunshine' />
