@@ -26,15 +26,29 @@ const theme = createMuiTheme({
   }
 })
 
-ReactDOM.render(
-  <Provider>
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </MuiThemeProvider>
-  </Provider>,
-  document.getElementById('root')
-)
+// this function is here to ensure the main app
+// loads after a user puts in the correct passphrase
+
+function renderDom() {
+  const root = document.getElementById('root')
+  if (root) {
+    return ReactDOM.render(
+      <Provider>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </MuiThemeProvider>
+      </Provider>,
+      root
+    )
+  } else {
+  }
+}
+
+setInterval(() => {
+  const root = document.getElementById('root')
+  if (!root?.lastElementChild) renderDom()
+}, 500)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

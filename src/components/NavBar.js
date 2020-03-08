@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import { MoreVert, ArrowBackIos } from '@material-ui/icons'
+import { ArrowBackIos } from '@material-ui/icons'
 import sun from '../images/art_clear.png'
 
 const Container = styled.div`
@@ -50,9 +50,6 @@ export function NavBar({ match }) {
           <Title primary={path !== '/' ? '' : 'true'} variant='h6'>
             {title}
           </Title>
-          <IconButton aria-label='display more actions' edge='end' color='inherit'>
-            <MoreVert />
-          </IconButton>
         </Toolbar>
       </AppBar>
     </Container>
