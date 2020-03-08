@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   title: {
     flexGrow: 1,
     fontSize: 100,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 50
+    },
     fontFamily: 'Pacifico, cursive'
   }
 }))

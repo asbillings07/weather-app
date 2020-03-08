@@ -2,14 +2,14 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
 import { WeatherHome } from './pages/WeatherHome'
-// import { useStore } from './Store'
+import { WeatherDetails } from './pages/WeatherDetail'
 function App() {
-  // const store = useStore()
   return (
     <Router>
       <NavBar title='Sunshine' />
       <Switch>
         <Route exact path='/' component={WeatherHome} />
+        <Route path='/details/:id' component={WeatherDetails} />
       </Switch>
     </Router>
   )

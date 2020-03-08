@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
-import { getWeekDay } from './reusables/DateTimes'
+import { getWeekDay, roundValue } from './reusables/HelperFuncs'
 import { getWeatherIcon } from './reusables/Icons'
 export const Forcast = ({ weatherData }) => {
+  const history = useHistory()
   console.log(weatherData)
   return weatherData.map((forcast, i) => (
-    <Container key={i}>
+    <Container key={i} onClick={() => history.push(`/details/${i}`)}>
       <ForcastWrapper>
         <StatusWrapper>
           <WeekDay variant='h3'>{i === 0 ? 'Tomorrow' : getWeekDay(forcast.dt)}</WeekDay>
@@ -16,8 +18,8 @@ export const Forcast = ({ weatherData }) => {
         <WeatherImage src={getWeatherIcon(forcast.weather[0].icon)} alt={forcast.weather[0].description} />
       </ForcastWrapper>
       <TempWrapper>
-        <MaxTemp variant='h3'>{`${Math.ceil(forcast.temp.max)}\u00b0`}</MaxTemp>
-        <MinTemp variant='h5'>{`${Math.floor(forcast.temp.min)}\u00b0`}</MinTemp>
+        <MaxTemp variant='h3'>{`${roundValue(forcast.temp.max)}\u00b0`}</MaxTemp>
+        <MinTemp variant='h5'>{`${roundValue(forcast.temp.min)}\u00b0`}</MinTemp>
       </TempWrapper>
     </Container>
   ))
@@ -27,7 +29,14 @@ const Container = styled.div`
   display: flex;
   background-color: #fff;
   padding: 25px 0px;
-  padding-left: 168px;
+  padding-left: 45px;
+  &:hover {
+    background: #f5f5f5;
+    box-shadow: inset 0px 6px 25px #c1c1c1;
+  }
+  @media (min-width: 768px) {
+    padding-left: 168px;
+  }
 `
 const ForcastWrapper = styled.div`
   display: flex;
@@ -39,9 +48,26 @@ const StatusWrapper = styled.div`
   order: 1;
   justify-content: center;
 `
-const WeekDay = styled(Typography)``
-const WeatherStatus = styled(Typography)``
-const WeatherImage = styled.img``
+const WeekDay = styled(Typography)`
+  font-size: 17px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
+const WeatherStatus = styled(Typography)`
+  font-size: 11px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
+const WeatherImage = styled.img`
+  height: 24px;
+  width: 24px;
+  @media (min-width: 768px) {
+    height: 10em;
+    width: 10em;
+  }
+`
 
 const TempWrapper = styled.div`
   display: flex;
@@ -49,9 +75,18 @@ const TempWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `
-const MaxTemp = styled(Typography)``
+const MaxTemp = styled(Typography)`
+  font-size: 17px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
 const MinTemp = styled(Typography)`
   align-self: center;
+  font-size: 17px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
 `
 
 Forcast.propTypes = {
