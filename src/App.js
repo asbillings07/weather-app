@@ -7,7 +7,7 @@ import { WeatherDetails } from './pages/WeatherDetail'
 export const App = () => {
   return (
     <Router>
-      <NavBar title='Sunshine' />
+      <NavBar />
       <Switch>
         <Route exact path='/' component={WeatherHome} />
         <Route path='/details/:id' component={WeatherDetails} />

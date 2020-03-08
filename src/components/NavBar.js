@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -26,14 +25,16 @@ const SunImage = styled.img`
 const Title = styled(Typography)`
   flex-grow: 1;
   font-size: 50px;
-  font-family: Pacifico, cursive;
+  font-family: ${props => (props.primary ? 'Pacifico, cursive' : 'sans-serif')};
   @media (min-width: 768px) {
     font-size: 100px;
   }
 `
 
-export function NavBar({ title, match }) {
+export function NavBar({ match }) {
   const history = useHistory()
+  const path = history.location.pathname
+  const title = path !== '/' ? 'Details' : 'Sunshine'
   return (
     <Container>
       <AppBar position='static'>
@@ -46,7 +47,9 @@ export function NavBar({ title, match }) {
             ''
           )}
           <SunImage src={sun} alt='sunshine' />
-          <Title variant='h6'>{title}</Title>
+          <Title primary={path !== '/' ? '' : 'true'} variant='h6'>
+            {title}
+          </Title>
           <IconButton aria-label='display more actions' edge='end' color='inherit'>
             <MoreVert />
           </IconButton>
@@ -54,8 +57,4 @@ export function NavBar({ title, match }) {
       </AppBar>
     </Container>
   )
-}
-
-NavBar.propTypes = {
-  title: PropTypes.string.isRequired
 }
