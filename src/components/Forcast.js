@@ -29,18 +29,17 @@ const Container = styled.div`
   display: flex;
   background-color: #fff;
   padding: 25px 0px;
-  padding-left: 45px;
   &:hover {
     background: #f5f5f5;
     box-shadow: inset 0px 6px 25px #c1c1c1;
   }
-  @media (min-width: 768px) {
-    padding-left: 168px;
-  }
 `
 const ForcastWrapper = styled.div`
   display: flex;
-  width: 55%;
+  width: 60%;
+  @media (min-width: 768px) {
+    width: 64%;
+  }
 `
 const StatusWrapper = styled.div`
   display: flex;
@@ -63,9 +62,11 @@ const WeatherStatus = styled(Typography)`
 const WeatherImage = styled.img`
   height: 24px;
   width: 24px;
+  margin: 0px 10px;
   @media (min-width: 768px) {
     height: 10em;
     width: 10em;
+    margin: 0px 25px;
   }
 `
 

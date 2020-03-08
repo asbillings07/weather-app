@@ -46,20 +46,32 @@ export const Detail = ({ weatherDetails, match }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 25px;
+  padding: 20px;
   margin: auto
   width: 100%;
+  @media (min-width: 768px) {
+    padding: 25px;
+  }
 `
 const DateWrapper = styled.div`
   margin-bottom: 30px;
   align-self: flex-start;
 `
+
 const Today = styled(Typography)`
-  font-size: 6em;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  @media (min-width: 768px) {
+    font-size: 6em;
+  }
 `
 const MonthDate = styled(Typography)`
-  font-size: 3em;
+  font-size: 12px;
   color: #646464;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
 `
 
 const MainContent = styled.div`
@@ -72,15 +84,21 @@ const MainContent = styled.div`
 const TempWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 38%;
 `
 const MaxDegrees = styled(Typography)`
-  font-size: 15em;
+  font-size: 72px;
+  @media (min-width: 768px) {
+    font-size: 15em;
+  }
 `
 const MinDegrees = styled(Typography)`
-  font-size: 8em;
+  font-size: 36px;
   color: #646464;
   align-self: center;
+  @media (min-width: 768px) {
+    font-size: 8em;
+  }
 `
 
 const StatusWrapper = styled.div`
@@ -88,22 +106,48 @@ const StatusWrapper = styled.div`
   flex-direction: column;
 `
 const Status = styled(Typography)`
-  font-size: 3em;
+  font-size: 17px;
   font-weight: lighter;
   color: #646464;
   align-self: center;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
 `
 const Icon = styled.img`
-  height: 32em;
-  width: 32em;
+  height: 75px;
+  width: 75px;
+  @media (min-width: 768px) {
+    height: 32em;
+    width: 32em;
+  }
 `
 
 const DetailWrapper = styled.div`
-  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `
-const Humidity = styled(Typography)``
-const Pressure = styled(Typography)``
-const Wind = styled(Typography)``
+const Humidity = styled(Typography)`
+  font-size: 17px;
+  margin-bottom: 3px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
+const Pressure = styled(Typography)`
+  font-size: 17px;
+  margin-bottom: 3px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
+const Wind = styled(Typography)`
+  font-size: 17px;
+  @media (min-width: 768px) {
+    font-size: 3em;
+  }
+`
 
 Detail.propTypes = {
   weatherDetails: PropTypes.array.isRequired
