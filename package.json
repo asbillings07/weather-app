@@ -5,9 +5,6 @@
   "dependencies": {
     "@material-ui/core": "^4.9.5",
     "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "moment": "^2.24.0",
     "react": "^16.13.0",
@@ -23,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "_deploy": "netlify deploy --dir=build --prod",
-    "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
+    "_encrypt": "npx staticrypt public/index.html Warn3rM3d1a -o public/index.html",
     "publish": "npm run build && npm run _encrypt && npm run _deploy"
   },
   "eslintConfig": {
@@ -46,5 +43,10 @@
       "test",
       "expect"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2"
   }
 }
