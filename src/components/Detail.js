@@ -84,7 +84,6 @@ const MainContent = styled.div`
 const TempWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 38%;
 `
 const MaxDegrees = styled(Typography)`
   font-size: 72px;

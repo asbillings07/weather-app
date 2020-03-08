@@ -16,10 +16,10 @@ function Provider({ children }) {
 
   const fetchWeather = useCallback(async () => {
     console.log('Getting in here')
-    if (!weatherData) {
-      const res = await api(apiUrl)
-      saveState(res.data)
+    const res = await api(apiUrl)
+    if (weatherData !== res.data) {
       setWeatherData(res.data)
+      saveState(res.data)
     } else {
       return
     }
