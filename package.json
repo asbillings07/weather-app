@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --reporters=jest-nyancat-reporter",
+    "test": "react-scripts test --reporters=jest-nyancat-reporter --watchAll",
     "eject": "react-scripts eject",
     "_deploy": "netlify deploy --dir=build --prod",
     "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
