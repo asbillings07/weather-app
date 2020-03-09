@@ -47,7 +47,7 @@ export function NavBar({ match }) {
             ''
           )}
           <SunImage src={sun} alt='sunshine' />
-          <Title primary={path !== '/' ? '' : 'true'} variant='h6'>
+          <Title data-testid='appTitle' primary={path !== '/' ? '' : 'true'} variant='h6'>
             {title}
           </Title>
         </Toolbar>

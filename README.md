@@ -1,5 +1,15 @@
 This Project was created for a coding challenge for WarnerMedia.
 
+## Live Link
+
+You can view this project live here:
+[Weather App](https://wm-weather-app.netlify.com/)
+
+You will need to following password: Warn3rM3d1a
+You will need to enter this password twice to access the site.
+
+If you would like to run this project locally see below.
+
 ## How to Run Locally
 
 In the root directory run:

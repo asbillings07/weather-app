@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "_deploy": "netlify deploy --dir=build --prod",
-    "_encrypt": "npx staticrypt public/index.html Warn3rM3d1a -o public/index.html",
+    "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
     "publish": "npm run build && npm run _encrypt && npm run _deploy"
   },
   "eslintConfig": {
