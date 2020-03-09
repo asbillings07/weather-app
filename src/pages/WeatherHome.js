@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStore } from '../Store'
 import { Today } from '../components/Today'
-import { Forcast } from '../components/Forcast'
+import { Forecast } from '../components/Forecast'
 import { Progress } from '../components/reusables/Progress'
 
 export const WeatherHome = () => {
@@ -11,7 +11,7 @@ export const WeatherHome = () => {
       {data ? (
         <>
           <Today weatherData={data} />
-          <Forcast weatherData={data.list} />
+          <Forecast weatherData={data.list} />
         </>
       ) : (
         <Progress />

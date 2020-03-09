@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --reporters=jest-nyancat-reporter",
     "eject": "react-scripts eject",
     "_deploy": "netlify deploy --dir=build --prod",
     "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
@@ -42,13 +42,23 @@
     "globals": [
       "test",
       "expect",
-      "fetch"
-    ]
+      "fetch",
+      "jest",
+      "beforeEach"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/exhaustive-deps": "warn"
+    }
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "jest-nyancat-reporter": "^2.0.0",
     "standard": "^14.3.1"
   }
 }

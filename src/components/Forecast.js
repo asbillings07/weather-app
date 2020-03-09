@@ -3,24 +3,28 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
-import { getWeekDay, roundValue } from './reusables/HelperFuncs'
+import { getWeekDay, roundValue } from '../helperFunctions/functions'
 import { getWeatherIcon } from './reusables/Icons'
 
-export const Forcast = ({ weatherData }) => {
+export const Forecast = ({ weatherData }) => {
   const history = useHistory()
 
   return weatherData.map((forcast, i) => (
     <Container key={i} onClick={() => history.push(`/details/${i}`)}>
-      <ForcastWrapper>
+      <ForecastWrapper>
         <StatusWrapper>
-          <WeekDay variant='h3'>{i === 0 ? 'Tomorrow' : getWeekDay(forcast.dt)}</WeekDay>
-          <WeatherStatus variant='h5'>{forcast.weather[0].main}</WeatherStatus>
+          <WeekDay data-testid='weekDay' variant='h3'>
+            {i === 0 ? 'Tomorrow' : getWeekDay(forcast.dt)}
+          </WeekDay>
+          <WeatherStatus data-testid='weatherStatus' variant='h5'>
+            {forcast.weather[0].main}
+          </WeatherStatus>
         </StatusWrapper>
-        <WeatherImage src={getWeatherIcon(forcast.weather[0].icon)} alt={forcast.weather[0].description} />
-      </ForcastWrapper>
+        <WeatherImage data-testid='weatherImage' src={getWeatherIcon(forcast.weather[0].icon)} alt={forcast.weather[0].description} />
+      </ForecastWrapper>
       <TempWrapper>
-        <MaxTemp variant='h3'>{`${roundValue(forcast.temp.max)}\u00b0`}</MaxTemp>
-        <MinTemp variant='h5'>{`${roundValue(forcast.temp.min)}\u00b0`}</MinTemp>
+        <MaxTemp data-testid='maxTemp' variant='h3'>{`${roundValue(forcast.temp.max)}\u00b0`}</MaxTemp>
+        <MinTemp data-testid='minTemp' variant='h5'>{`${roundValue(forcast.temp.min)}\u00b0`}</MinTemp>
       </TempWrapper>
     </Container>
   ))
@@ -35,7 +39,7 @@ const Container = styled.div`
     box-shadow: inset 0px 6px 25px #c1c1c1;
   }
 `
-const ForcastWrapper = styled.div`
+const ForecastWrapper = styled.div`
   display: flex;
   width: 60%;
   @media (min-width: 768px) {
@@ -91,6 +95,6 @@ const MinTemp = styled(Typography)`
   }
 `
 
-Forcast.propTypes = {
+Forecast.propTypes = {
   weatherData: PropTypes.array.isRequired
 }

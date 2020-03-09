@@ -5,15 +5,19 @@ import { loadState, saveState } from './localStorage'
 import { api } from './request'
 const Store = createContext()
 
-function Provider({ children }) {
+const Provider = ({ children }) => {
   const [weatherData, setWeatherData] = useState(loadState())
 
   useEffect(() => {
     const fetchWeather = async () => {
-      const res = await api(apiUrl)
-      if (weatherData !== res.data) {
-        setWeatherData(res.data)
-        saveState(res.data)
+      try {
+        const res = await api(apiUrl)
+        if (weatherData !== res.data) {
+          setWeatherData(res.data)
+          saveState(res.data)
+        }
+      } catch (err) {
+        console.log(err)
       }
     }
     fetchWeather()

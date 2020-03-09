@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
-import { getMonthDay, roundValue } from './reusables/HelperFuncs'
+import { getMonthDay, roundValue } from '../helperFunctions/functions'
 import { getWeatherIcon } from './reusables/Icons'
 
 export const Today = ({ weatherData }) => {
@@ -11,13 +11,15 @@ export const Today = ({ weatherData }) => {
   return (
     <Container>
       <WeatherTemps>
-        <TodayDate variant='h3'>Today, {getMonthDay(today.dt)} </TodayDate>
-        <MaxDegrees>{`${roundValue(today.temp.max)}\u00b0`}</MaxDegrees>
-        <MinDegrees>{`${roundValue(today.temp.min)}\u00b0`}</MinDegrees>
+        <TodayDate data-testid='todayDate' variant='h3'>
+          Today, {getMonthDay(today.dt)}
+        </TodayDate>
+        <MaxDegrees data-testid='maxDegrees'>{`${roundValue(today.temp.max)}\u00b0`}</MaxDegrees>
+        <MinDegrees data-testid='minDegrees'>{`${roundValue(today.temp.min)}\u00b0`}</MinDegrees>
       </WeatherTemps>
       <WeatherForcast>
-        <WeatherIcon src={getWeatherIcon(weather.icon)} alt={weather.description} />
-        <Forcast>{weather.main}</Forcast>
+        <WeatherIcon data-testid='weatherIcon' src={getWeatherIcon(weather.icon)} alt={weather.description} />
+        <Forcast data-testid='forcast'>{weather.main}</Forcast>
       </WeatherForcast>
     </Container>
   )

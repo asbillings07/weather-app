@@ -29,7 +29,7 @@ const theme = createMuiTheme({
 // this function is here to ensure the main app
 // loads after a user puts in the correct passphrase
 
-function renderDom() {
+function renderDom () {
   const root = document.getElementById('root')
   if (root) {
     return ReactDOM.render(

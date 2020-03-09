@@ -2,7 +2,7 @@ import React from 'react'
 import { customRender } from '../setupTests'
 import { App } from '../App'
 
-test('renders learn react link', () => {
+test('displays title of application', () => {
   const { getByTestId } = customRender(<App />)
   expect(getByTestId('appTitle').textContent).toBe('Sunshine')
 })
