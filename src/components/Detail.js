@@ -14,7 +14,6 @@ export const Detail = ({ weatherDetails, match }) => {
   }
 
   const details = weatherDetails[id]
-  console.log(details)
 
   return (
     <Container>

@@ -15,7 +15,7 @@ export const saveState = state => {
     const serializedState = JSON.stringify(state)
     window.localStorage.setItem('state', serializedState)
   } catch (err) {
-    console.log(err)
+    return err
   }
 }
 
@@ -23,6 +23,6 @@ export const removeState = () => {
   try {
     window.localStorage.removeItem('state')
   } catch (err) {
-    console.log(err)
+    return err
   }
 }

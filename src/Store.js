@@ -7,15 +7,12 @@ const Store = createContext()
 
 function Provider({ children }) {
   const [weatherData, setWeatherData] = useState(loadState())
-  console.log('In Provider')
 
   useEffect(() => {
-    console.log('Running...')
     fetchWeather()
   }, [])
 
   const fetchWeather = useCallback(async () => {
-    console.log('Getting in here')
     const res = await api(apiUrl)
     if (weatherData !== res.data) {
       setWeatherData(res.data)

@@ -5,9 +5,10 @@ import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { getWeekDay, roundValue } from './reusables/HelperFuncs'
 import { getWeatherIcon } from './reusables/Icons'
+
 export const Forcast = ({ weatherData }) => {
   const history = useHistory()
-  console.log(weatherData)
+
   return weatherData.map((forcast, i) => (
     <Container key={i} onClick={() => history.push(`/details/${i}`)}>
       <ForcastWrapper>
