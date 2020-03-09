@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { apiUrl } from './config'
 import { loadState, saveState } from './localStorage'
 import { api } from './request'
@@ -9,18 +9,15 @@ function Provider({ children }) {
   const [weatherData, setWeatherData] = useState(loadState())
 
   useEffect(() => {
+    const fetchWeather = async () => {
+      const res = await api(apiUrl)
+      if (weatherData !== res.data) {
+        setWeatherData(res.data)
+        saveState(res.data)
+      }
+    }
     fetchWeather()
   }, [])
-
-  const fetchWeather = useCallback(async () => {
-    const res = await api(apiUrl)
-    if (weatherData !== res.data) {
-      setWeatherData(res.data)
-      saveState(res.data)
-    } else {
-      return
-    }
-  }, [weatherData])
 
   const value = {
     data: weatherData

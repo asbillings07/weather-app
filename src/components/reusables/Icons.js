@@ -1,59 +1,59 @@
-import art_clear from '../../images/art_clear.png'
-import art_clouds from '../../images/art_clouds.png'
-import art_light_clouds from '../../images/art_light_clouds.png'
-import art_fog from '../../images/art_fog.png'
-import art_rain from '../../images/art_rain.png'
-import art_snow from '../../images/art_snow.png'
-import art_storm from '../../images/art_storm.png'
-import ic_clear from '../../images/ic_clear.png'
-import ic_cloudy from '../../images/ic_cloudy.png'
-import ic_fog from '../../images/ic_fog.png'
-import ic_light_clouds from '../../images/ic_light_clouds.png'
-import art_light_rain from '../../images/art_light_rain.png'
-import ic_light_rain from '../../images/ic_light_rain.png'
-import ic_rain from '../../images/ic_rain.png'
-import ic_snow from '../../images/ic_snow.png'
-import ic_storm from '../../images/ic_storm.png'
+import artClear from '../../images/art_clear.png'
+import artClouds from '../../images/art_clouds.png'
+import artLightClouds from '../../images/art_light_clouds.png'
+import artFog from '../../images/art_fog.png'
+import artRain from '../../images/art_rain.png'
+import artSnow from '../../images/art_snow.png'
+import artStorm from '../../images/art_storm.png'
+import icClear from '../../images/ic_clear.png'
+import icCloudy from '../../images/ic_cloudy.png'
+import icFog from '../../images/ic_fog.png'
+import icLightClouds from '../../images/ic_light_clouds.png'
+import artLightRain from '../../images/art_light_rain.png'
+import icLightRain from '../../images/ic_light_rain.png'
+import icRain from '../../images/ic_rain.png'
+import icSnow from '../../images/ic_snow.png'
+import icStorm from '../../images/ic_storm.png'
 
 export const getWeatherIcon = octal => {
   switch (octal) {
     case '01d':
-      return art_clear
+      return artClear
     case '01n':
-      return ic_clear
+      return icClear
     case '02d':
-      return art_light_clouds
+      return artLightClouds
     case '02n':
-      return ic_light_clouds
+      return icLightClouds
     case '03d':
-      return art_clouds
+      return artClouds
     case '03n':
-      return ic_cloudy
+      return icCloudy
     case '04d':
-      return art_clouds
+      return artClouds
     case '04n':
-      return ic_cloudy
+      return icCloudy
     case '09d':
-      return art_light_rain
+      return artLightRain
     case '09n':
-      return ic_light_rain
+      return icLightRain
     case '10d':
-      return art_rain
+      return artRain
     case '10n':
-      return ic_rain
+      return icRain
     case '11d':
-      return art_storm
+      return artStorm
     case '11n':
-      return ic_storm
+      return icStorm
     case '13d':
-      return art_snow
+      return artSnow
     case '13n':
-      return ic_snow
+      return icSnow
     case '50d':
-      return art_fog
+      return artFog
     case '50n':
-      return ic_fog
+      return icFog
     default:
-      return art_clear
+      return artClear
   }
 }

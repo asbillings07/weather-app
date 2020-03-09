@@ -19,7 +19,7 @@ export const getWeekDay = unix => {
 export const degToCompass = num => {
   while (num < 0) num += 360
   while (num >= 360) num -= 360
-  //divide the number then round
+  // divide the number then round
   const val = Math.round((num - 11.25) / 22.5)
   const arr = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
   // return the absolute value in the array by index

@@ -31,7 +31,7 @@ const Title = styled(Typography)`
   }
 `
 
-export function NavBar({ match }) {
+export function NavBar ({ match }) {
   const history = useHistory()
   const path = history.location.pathname
   const title = path !== '/' ? 'Details' : 'Sunshine'
