@@ -29,5 +29,3 @@ jobs:
     - name: Run Tests
       run: yarn test
 
-    - name: Deploy
-      run: yarn publish
