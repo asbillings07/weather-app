@@ -1,5 +1,5 @@
 {
-  "name": "warner_coding_exercise",
+  "name": "weather_coding_exercise",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,21 +7,19 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "moment": "^2.24.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-moment": "^0.9.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --reporters=jest-nyancat-reporter --watchAll",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "build": "vite build",
+    "test": "jest --reporters=jest-nyancat-reporter --watchAll",
+    "preview": "vite preview",
     "_deploy": "netlify deploy --dir=build --prod",
     "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
-    "publish": "npm run build && npm run _encrypt && npm run _deploy"
+    "publish": "npm run build && npm run _deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,7 +56,10 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@vitejs/plugin-react": "^4.0.4",
+    "@webpack-cli/generators": "^3.0.7",
     "jest-nyancat-reporter": "^2.0.0",
-    "standard": "^14.3.1"
+    "standard": "^14.3.1",
+    "vite": "^4.4.9"
   }
 }
