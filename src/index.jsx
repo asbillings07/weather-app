@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { App } from './App'
-import { Provider } from './Store'
+import { Provider } from './Store/Context'
 import * as serviceWorker from './serviceWorker'
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'

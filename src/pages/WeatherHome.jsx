@@ -5,13 +5,13 @@ import { Forecast } from '../components/Forecast'
 import { Progress } from '../components/reusables/Progress'
 
 export const WeatherHome = () => {
-  const { data } = useStore()
+  const { state } = useStore()
   return (
     <>
-      {data ? (
+      {state.weather ? (
         <>
-          <Today weatherData={data} className='Today'/>
-          <Forecast weatherData={data.list} className='Forecast' />
+          <Today weatherData={state.weather} className='Today'/>
+          <Forecast weatherData={state.weather.list} className='Forecast' />
         </>
       ) : (
         <Progress />

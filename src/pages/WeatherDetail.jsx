@@ -2,8 +2,8 @@ import { useStore } from '../Store'
 import PropTypes from "prop-types";
 import { Detail } from '../components/Detail'
 export const WeatherDetails = ({ match }) => {
-  const { data } = useStore()
-  return <Detail weatherDetails={data.list} match={match} />
+  const { state } = useStore()
+  return <Detail weatherDetails={state.weather.list} match={match} />
 }
 
 WeatherDetails.propTypes = {

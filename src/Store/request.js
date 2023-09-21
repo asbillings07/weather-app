@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const api = (url, method = 'GET', body = null) => {
+export const api = (url, cache = false, method = 'GET',  body = null) => {
   const options = {
     method,
     headers: {
@@ -8,7 +8,14 @@ export const api = (url, method = 'GET', body = null) => {
     }
   }
 
-  if (body !== null) {
+  if (cache) {
+    const cacheHeaders = {
+      'Cache-Control': 'max-age=604800'
+    }
+    options.headers = {...options.headers, ...cacheHeaders}
+  }
+
+  if (body) {
     options.data = body
   }
 
