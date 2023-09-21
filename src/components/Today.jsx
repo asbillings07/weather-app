@@ -10,18 +10,27 @@ export const Today = ({ weatherData }) => {
   return (
     <Container>
       <WeatherTemps>
-        <TodayDate data-testid='todayDate' variant='h3'>
+        <TodayDate data-testid="todayDate" variant="h3">
           Today, {getMonthDay(today.dt)}
         </TodayDate>
-        <MaxDegrees data-testid='maxDegrees'>{`${roundValue(today.temp.max)}\u00b0`}</MaxDegrees>
-        <MinDegrees data-testid='minDegrees'>{`${roundValue(today.temp.min)}\u00b0`}</MinDegrees>
+        <Location>Location: {weatherData.city.name}</Location>
+        <MaxDegrees data-testid="maxDegrees">{`${roundValue(
+          today.temp.max
+        )}\u00b0`}</MaxDegrees>
+        <MinDegrees data-testid="minDegrees">{`${roundValue(
+          today.temp.min
+        )}\u00b0`}</MinDegrees>
       </WeatherTemps>
       <WeatherForcast>
-        <WeatherIcon data-testid='weatherIcon' src={getWeatherIcon(weather.icon)} alt={weather.description} />
-        <Forcast data-testid='forcast'>{weather.main}</Forcast>
+        <WeatherIcon
+          data-testid="weatherIcon"
+          src={getWeatherIcon(weather.icon)}
+          alt={weather.description}
+        />
+        <Forcast data-testid="forcast">{weather.main}</Forcast>
       </WeatherForcast>
     </Container>
-  )
+  );
 }
 
 // Styles
@@ -44,6 +53,14 @@ const TodayDate = styled(Typography)`
     font-size: 50px;
   }
 `
+const Location = styled(Typography)`
+  font-size: 15px;
+  margin-top: 10px;
+  color: #fff;
+  @media (min-width: 768px) {
+    font-size: 40px;
+  }
+`;
 const MaxDegrees = styled(Typography)`
   font-size: 54px;
   color: #fff;
