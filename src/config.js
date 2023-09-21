@@ -1,1 +1,5 @@
-export const apiUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily?q=Atlanta&mode=json&cnt=5&units=imperial&APPID=1d23225b2bdc33bac49f814afcdb5a5f'
+const API_KEY = import.meta.env.VITE_APP_API_KEY
+
+export const buildApiUrl = (forecastType = 'daily', location = 'Atlanta', count = 5) => {
+    return `https://api.openweathermap.org/data/2.5/forecast/${forecastType}?q=${location}&mode=json&cnt=${count}&units=imperial&APPID=${API_KEY}`
+}

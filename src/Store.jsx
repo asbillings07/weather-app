@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { apiUrl } from './config'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { buildApiUrl } from './config'
 import { loadState, saveState } from './localStorage'
 import { api } from './request'
 const Store = createContext()
@@ -11,7 +11,7 @@ const Provider = ({ children }) => {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const res = await api(apiUrl)
+        const res = await api(buildApiUrl())
         if (weatherData !== res.data) {
           setWeatherData(res.data)
           saveState(res.data)
