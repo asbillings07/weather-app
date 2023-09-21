@@ -3,15 +3,30 @@ import { buildWeatherApi, buildLocationApi } from './config'
 import { loadState, saveState } from './localStorage'
 
 const ERROR = 'ERROR'
-const GETWEATHER = 'GETWEATHER'
-const GETGEOLOCATION = 'GETGEOLOCATION'
+const GET_WEATHER = "GET_WEATHER";
+const GET_GEO_POSITION = "GET_GEO_POSITION";
+const GET_LOCATION = "GET_LOCATION";
 const LOADING = 'LOADING'
-const TOGGLESUCCESS = 'TOGGLESUCCESS'
+const TOGGLE_SUCCESS = "TOGGLE_SUCCESS";
+
+export const reducerTypes = {
+  ERROR,
+  GET_GEO_POSITION,
+  GET_LOCATION,
+  GET_WEATHER,
+  LOADING,
+  TOGGLE_SUCCESS
+}
 
 export const initialState = {
   weather: null,
   location: null,
   success: false,
+  geoPosition: {
+    status: 'idle',
+    coords: null,
+    error: null
+  },
   error: false,
   errorMessage: null,
   loading: true
@@ -19,13 +34,23 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case GETGEOLOCATION:
+    case GET_GEO_POSITION:
       return {
         ...state,
-        location: action.payload.location,
-        loading: false
-      }
-    case GETWEATHER:
+        geoPosition: {
+          status: action.payload.geoPosition.status,
+          coords: action.payload.geoPosition.coords,
+          error: action.payload.geoPosition.error,
+        },
+        loading: false,
+      };
+    case GET_LOCATION:
+            return {
+              ...state,
+              location: action.payload.location,
+              loading: false,
+            }
+    case GET_WEATHER:
       return {
         ...state,
         weather: action.payload.weather,
@@ -36,7 +61,7 @@ export const reducer = (state, action) => {
         ...state,
         loading: true
       }
-    case TOGGLESUCCESS:
+    case TOGGLE_SUCCESS:
       return {
         ...state,
         success: action.payload
@@ -61,13 +86,13 @@ export const fetchWeather = ( location = 'Atlanta') => async (dispatch) => {
   const weatherState = loadState()
   if (weatherState && weatherState.city.name) {
     if (weatherState.city.name === location) {
-        dispatch({ type: GETWEATHER, payload: { weather: weatherState } })
+        dispatch({ type: GET_WEATHER, payload: { weather: weatherState } })
     }
   } else {
     try {
         const res = await api(buildWeatherApi(location))
         saveState(res.data)
-        dispatch({ type: GETWEATHER, payload: { weather: res.data } })
+        dispatch({ type: GET_WEATHER, payload: { weather: res.data } })
     } catch (err) {
         dispatch({ type: ERROR, payload: { error: errorMessage } })
     }
@@ -75,15 +100,16 @@ export const fetchWeather = ( location = 'Atlanta') => async (dispatch) => {
 
 }
 
-export const fetchUserLocation = (lat = '33.8231296', long = '-84.7904768') => async (dispatch) => {
-  dispatch({ type: LOADING })
-  try {
-    const res = await api(buildLocationApi(lat, long), true)
-    dispatch({ type: GETGEOLOCATION, payload: { location: res.data } })
-  } catch (err) {
-    dispatch({ type: ERROR, payload: { error: errorMessage } })
-  }
-}
+export const fetchUserLocation = ({ latitude, longitude }) =>
+  async (dispatch) => {
+    dispatch({ type: LOADING });
+    try {
+      const res = await api(buildLocationApi({ latitude, longitude }));
+      dispatch({ type: GET_LOCATION, payload: { location: res.data.postalCodes } });
+    } catch (err) {
+      dispatch({ type: ERROR, payload: { error: errorMessage } });
+    }
+  };
 
 // export const fetchComment = (id) => async (dispatch) => {
 //   dispatch({ type: LOADING })

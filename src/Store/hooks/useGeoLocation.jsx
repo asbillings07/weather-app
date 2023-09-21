@@ -1,76 +1,54 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useReducer, useEffect } from 'react'
+import { useEffect } from 'react'
+import { reducerTypes } from '../reducers'
 
-const error = 'ERROR'
-const success = 'SUCCESS'
-const started = 'STARTED'
-
-function geoPositionReducer(state, action) {
-  switch (action.type) {
-    case error: {
-      return {
-        ...state,
-        status: 'rejected',
-        error: action.payload
-      }
-    }
-    case success: {
-      return {
-        ...state,
-        status: 'resolved',
-        position: action.payload
-      }
-    }
-    case started: {
-      return {
-        ...state,
-        status: 'pending'
-      }
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
-  }
-}
-
-const initialState = {
-  status: 'idle',
-  position: null,
-  error: null
-}
-
-export const useGeolocation = () => {
-  const [state, dispatch] = useReducer(geoPositionReducer, initialState)
-
+export const useGeoLocation = (
+  dispatch
+) => {
   useEffect(() => {
     if (!navigator.geolocation) {
       dispatch({
-        type: error,
-        error: new Error('Geolocation is not supported')
-      })
-      return
+        type: reducerTypes.ERROR,
+        error: new Error("Geolocation is not supported"),
+      });
+      return;
     }
 
-    dispatch({ type: started })
+    dispatch({ type: reducerTypes.LOADING });
     const positionSuccess = (position) => {
-      console.log('GEO POSITION', position)
-      dispatch({ type: success, payload: position })
-    }
-    const positionError = (error) => dispatch({ type: error, payload: error })
+      dispatch({
+        type: reducerTypes.GET_GEO_POSITION,
+        payload: {
+          geoPosition: {
+            status: "resolved",
+            coords: position.coords,
+            error: null,
+          },
+        },
+      });
+    };
+    const positionError = (error) =>
+      dispatch({
+        type: reducerTypes.ERROR,
+        payload: {
+          geoPosition: {
+            status: "rejected",
+            position: null,
+            error: error,
+          },
+        },
+      });
     const options = {
       enableHighAccuracy: true,
       maximumAge: 30000,
-      timeout: 27000
-    }
+      timeout: 27000,
+    };
 
-    const geoWatch = navigator.geolocation.watchPosition(positionSuccess, positionError, options)
-    return () => navigator.geolocation.clearWatch(geoWatch)
-  }, [])
-
-  const { status, position, error } = state
-  const isLoading = status === 'idle' || status === 'pending'
-  const isResolved = status === 'resolved'
-  const isRejected = status === 'rejected'
-
-  return [isLoading, isResolved, isRejected, position, error]
-}
+    const geoWatch = navigator.geolocation.watchPosition(
+      positionSuccess,
+      positionError,
+      options
+    );
+    return () => navigator.geolocation.clearWatch(geoWatch);
+  }, []);
+};

@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { useStore } from '../Store'
+import { LocationDropDown } from './reusables/DropDown'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
+import { Input } from './reusables/Input'
 import { getMonthDay, roundValue } from '../helperFunctions/functions'
 import { getWeatherIcon } from './reusables/Icons'
 
-export const Today = ({ weatherData }) => {
+export const Today = () => {
+  const [location, setLocation] = useState('Atlanta');
+  const { state } = useStore()
+  console.log(state.location)
+  const weatherData = state.weather
   const today = weatherData.list[0]
   const weather = today.weather[0]
   return (
@@ -13,7 +21,26 @@ export const Today = ({ weatherData }) => {
         <TodayDate data-testid="todayDate" variant="h3">
           Today, {getMonthDay(today.dt)}
         </TodayDate>
-        <Location>Location: {weatherData.city.name}</Location>
+        <Location data-testid="location">
+          <LocationDropDown
+            location={location}
+            buttonLabel={`Current Location: ${location}`}
+            selectLabel="location"
+            setLocation={setLocation}
+            locationList={[]}
+          />
+        </Location>
+
+        {/* <Input
+          placeholder="Enter zip code or city"
+          label="Location:"
+          domID="location"
+          name="location"
+          initialValue={location}
+          textColor="black"
+          errorMessage="Name field can not be submitted when empty"
+          onChange={(e) => setLocation(e.target.value)}
+        /> */}
         <MaxDegrees data-testid="maxDegrees">{`${roundValue(
           today.temp.max
         )}\u00b0`}</MaxDegrees>
@@ -21,14 +48,14 @@ export const Today = ({ weatherData }) => {
           today.temp.min
         )}\u00b0`}</MinDegrees>
       </WeatherTemps>
-      <WeatherForcast>
+      <WeatherForecast>
         <WeatherIcon
           data-testid="weatherIcon"
           src={getWeatherIcon(weather.icon)}
           alt={weather.description}
         />
-        <Forcast data-testid="forcast">{weather.main}</Forcast>
-      </WeatherForcast>
+        <Forecast data-testid="forecast">{weather.main}</Forecast>
+      </WeatherForecast>
     </Container>
   );
 }
@@ -53,8 +80,9 @@ const TodayDate = styled(Typography)`
     font-size: 50px;
   }
 `
-const Location = styled(Typography)`
+const Location = styled.div`
   font-size: 15px;
+  margin-left: -6px;
   margin-top: 10px;
   color: #fff;
   @media (min-width: 768px) {
@@ -75,11 +103,11 @@ const MinDegrees = styled(Typography)`
     font-size: 7em;
   }
 `
-const WeatherForcast = styled.div`
+const WeatherForecast = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-`
+  justify-content: end;
+`;
 const WeatherIcon = styled.img`
   height: 75px;
   width: 75px;
@@ -88,7 +116,7 @@ const WeatherIcon = styled.img`
     width: 25em;
   }
 `
-const Forcast = styled(Typography)`
+const Forecast = styled(Typography)`
   font-size: 17px;
   color: #fff;
   align-self: center;

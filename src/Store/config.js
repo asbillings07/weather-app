@@ -8,6 +8,9 @@ export const buildWeatherApi = (location = 'Atlanta') => {
     return `https://api.openweathermap.org/data/2.5/forecast/${forecastType}?q=${location}&mode=json&cnt=${count}&units=imperial&APPID=${API_KEY}`
 }
 
-export const buildLocationApi = (lat = '33.8231296', long = '-84.7904768') => {
-    return `http://api.geonames.org/findNearbyPostalCodesJSON?lat=${lat}&lng=${long}&username=${USERNAME}`
-}
+export const buildLocationApi = ({
+  latitude = "33.8231296",
+  longitude = "-84.7904768",
+}) => {
+  return `http://api.geonames.org/findNearbyPostalCodesJSON?lat=${latitude}&lng=${longitude}&username=${USERNAME}`;
+};
