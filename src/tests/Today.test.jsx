@@ -1,10 +1,11 @@
-import React from 'react'
 import { customRender } from '../setupTests'
+import { describe, it, expect } from 'vitest';
 import { Today } from '../components/Today'
 import { weatherData } from '../mocks/mockData'
 import { getMonthDay } from '../helperFunctions/functions'
 
-test("shows Today's weather information with icon", () => {
+describe('Today.jsx', () => {
+it("shows Today's weather information with icon", () => {
   const { getByTestId } = customRender(<Today weatherData={weatherData} />)
 
   const weatherMain = weatherData.list[0].weather[0]
@@ -16,3 +17,5 @@ test("shows Today's weather information with icon", () => {
   expect(getByTestId('weatherIcon').alt).toBe(weatherMain.description)
   expect(getByTestId('forcast').textContent).toBe(weatherMain.main)
 })
+})
+
