@@ -1,20 +1,21 @@
-import React from 'react'
 import { customRender, cleanup } from '../setupTests'
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Detail } from '../components/Detail'
 import { weatherData } from '../mocks/mockData'
 import { degToCompass, getMonthDay } from '../helperFunctions/functions'
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useHistory: () => ({
-    push: jest.fn()
+    push: vi.fn()
   })
 }))
 
+describe('Detail.jsx', () => {
 beforeEach(() => {
   cleanup()
 })
 
-test('should show detail weather forcast elements', () => {
+it('should show detail weather forcast elements', () => {
   const match = {
     params: {
       id: 0
@@ -33,7 +34,7 @@ test('should show detail weather forcast elements', () => {
   expect(getByTestId('wind')).toBeTruthy()
 })
 
-test('Detail Page matches Today weather Details', () => {
+it('Detail Page matches Today weather Details', () => {
   const match = {
     params: {
       id: 0
@@ -55,7 +56,7 @@ test('Detail Page matches Today weather Details', () => {
   expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${degToCompass(forecast.deg)}`)
 })
 
-test('Detail Page matches Tomorrow weather Details', () => {
+it('Detail Page matches Tomorrow weather Details', () => {
   const match = {
     params: {
       id: 1
@@ -76,3 +77,5 @@ test('Detail Page matches Tomorrow weather Details', () => {
   expect(getByTestId('pressure').textContent).toBe(`Pressure: ${forecast.pressure} hPa`)
   expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${degToCompass(forecast.deg)}`)
 })
+})
+

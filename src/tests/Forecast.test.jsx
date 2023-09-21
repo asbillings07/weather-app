@@ -1,19 +1,21 @@
-import React from 'react'
+
 import { customRender, cleanup } from '../setupTests'
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Forecast } from '../components/Forecast'
 import { weatherData } from '../mocks/mockData'
 import { getWeekDay } from '../helperFunctions/functions'
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useHistory: () => ({
-    push: jest.fn()
+    push: vi.fn()
   })
 }))
 
+describe('Forecast.jsx', () => {
 beforeEach(() => {
   cleanup()
 })
-test('should show 5 day weather forcast', () => {
+it('should show 5 day weather forcast', () => {
   const { queryAllByTestId } = customRender(<Forecast weatherData={weatherData.list} />)
 
   expect(queryAllByTestId('weekDay')).toHaveLength(5)
@@ -23,7 +25,7 @@ test('should show 5 day weather forcast', () => {
   expect(queryAllByTestId('minTemp')).toHaveLength(5)
 })
 
-test('Weather Data matches Json data', () => {
+it('Weather Data matches Json data', () => {
   const { queryAllByTestId } = customRender(<Forecast weatherData={weatherData.list} />)
   const weatherMain = weatherData.list[0].weather[0]
   const weatherForcast = weatherData.list
@@ -38,4 +40,6 @@ test('Weather Data matches Json data', () => {
   expect(queryAllByTestId('weatherImage')[0].alt).toBe(weatherMain.description)
   expect(queryAllByTestId('maxTemp')[0].textContent).toBe(`${Math.round(weatherForcast[0].temp.max)}°`)
   expect(queryAllByTestId('minTemp')[0].textContent).toBe(`${Math.round(weatherForcast[0].temp.min)}°`)
+})
+
 })

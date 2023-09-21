@@ -1,5 +1,5 @@
 {
-  "name": "warner_coding_exercise",
+  "name": "weather_coding_exercise",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,21 +7,34 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "moment": "^2.24.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-moment": "^0.9.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
     "styled-components": "^5.0.1"
   },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.4",
+    "eslint": "^8.49.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^22.1.0",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.3"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --reporters=jest-nyancat-reporter --watchAll",
-    "eject": "react-scripts eject",
+    "dev": "vite --port 3000",
+    "build": "vite build",
+    "test": "vitest",
+    "preview": "vite preview",
     "_deploy": "netlify deploy --dir=build --prod",
     "_encrypt": "npx staticrypt build/index.html Warn3rM3d1a -o build/index.html",
-    "publish": "npm run build && npm run _encrypt && npm run _deploy"
+    "publish": "npm run build && npm run _deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,28 +50,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "standard": {
-    "globals": [
-      "test",
-      "expect",
-      "fetch",
-      "jest",
-      "beforeEach"
-    ],
-    "parser": "babel-eslint",
-    "plugins": [
-      "react-hooks"
-    ],
-    "rules": {
-      "react-hooks/exhaustive-deps": "warn"
-    }
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "jest-nyancat-reporter": "^2.0.0",
-    "standard": "^14.3.1"
   }
 }

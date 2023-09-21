@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect'
-import React from 'react'
-import { render } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react'
 import { Provider } from './Store'
+
 
 function customRender (ui, options) {
   function Wrapper (props) {
@@ -10,5 +10,7 @@ function customRender (ui, options) {
   return render(ui, { wrapper: Wrapper, ...options })
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export * from '@testing-library/react'
-export { customRender }
+
+export { customRender, cleanup }

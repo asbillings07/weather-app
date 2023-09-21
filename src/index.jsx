@@ -1,13 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import './index.css'
 import { App } from './App'
 import { Provider } from './Store'
 import * as serviceWorker from './serviceWorker'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: {
       light: '#03A9FA',
@@ -28,28 +27,14 @@ const theme = createMuiTheme({
 
 // this function is here to ensure the main app
 // loads after a user puts in the correct passphrase
-
-function renderDom () {
-  const root = document.getElementById('root')
-  if (root) {
-    return ReactDOM.render(
-      <Provider>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
-        </MuiThemeProvider>
-      </Provider>,
-      root
-    )
-  } else {
-  }
-}
-
-setInterval(() => {
-  const root = document.getElementById('root')
-  if (!root?.lastElementChild) renderDom()
-}, 500)
-
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </MuiThemeProvider>
+  </Provider>
+);
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
