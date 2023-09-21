@@ -1,12 +1,7 @@
-This Project was created for a coding challenge for WarnerMedia.
-
 ## Live Link
 
 You can view this project live here:
-[Weather App](https://wm-weather-app.netlify.com/)
-
-The app is password protected and you will need to following password to access it: Warn3rM3d1a
-The password will also be asked again if you refresh the page for security.
+[Weather App](https://sunshine-weather.netlify.app/)
 
 ## How to Run Locally
 
@@ -17,12 +12,10 @@ Once the repo has been cloned, In the root directory run:
 
 To start the project run:
 
-### `yarn start` or `npm start`
+### `yarn dev` or `npm run dev`
 
 This runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### Note: if you have another server running at localhost:3000 React will open a localhost at 3001
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.

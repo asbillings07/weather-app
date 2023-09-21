@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
@@ -98,3 +97,4 @@ const MinTemp = styled(Typography)`
 Forecast.propTypes = {
   weatherData: PropTypes.array.isRequired
 }
+Forecast.displayName = 'Forecast'

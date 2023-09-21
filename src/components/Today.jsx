@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { getMonthDay, roundValue } from '../helperFunctions/functions'
@@ -84,3 +83,4 @@ const Forcast = styled(Typography)`
 Today.propTypes = {
   weatherData: PropTypes.object.isRequired
 }
+Today.displayName = 'Today'

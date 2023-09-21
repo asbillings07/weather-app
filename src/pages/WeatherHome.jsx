@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useStore } from '../Store'
 import { Today } from '../components/Today'
 import { Forecast } from '../components/Forecast'
@@ -10,8 +10,8 @@ export const WeatherHome = () => {
     <>
       {data ? (
         <>
-          <Today weatherData={data} />
-          <Forecast weatherData={data.list} />
+          <Today weatherData={data} className='Today'/>
+          <Forecast weatherData={data.list} className='Forecast' />
         </>
       ) : (
         <Progress />

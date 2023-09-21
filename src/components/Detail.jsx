@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import React from 'react'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { getMonthDay, getWeekDay, degToCompass, roundValue } from '../helperFunctions/functions'
@@ -158,5 +157,7 @@ const Wind = styled(Typography)`
 `
 
 Detail.propTypes = {
-  weatherDetails: PropTypes.array.isRequired
+  weatherDetails: PropTypes.array.isRequired,
+  match: PropTypes.object.isRequired
 }
+Detail.displayName = 'Detail'

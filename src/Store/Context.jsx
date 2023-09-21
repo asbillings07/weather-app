@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { buildApiUrl } from './config'
 import { loadState, saveState } from './localStorage'
 import { api } from './request'
@@ -28,6 +29,10 @@ const Provider = ({ children }) => {
   }
 
   return <Store.Provider value={value}>{children}</Store.Provider>
+}
+
+Provider.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 /* allows use of State without needing to repeat useContext hook,

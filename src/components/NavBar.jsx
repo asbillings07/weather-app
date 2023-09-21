@@ -1,4 +1,3 @@
-import React from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
@@ -31,7 +30,7 @@ const Title = styled(Typography)`
   }
 `
 
-export function NavBar ({ match }) {
+export function NavBar () {
   const history = useHistory()
   const path = history.location.pathname
   const title = path !== '/' ? 'Details' : 'Sunshine'
@@ -55,3 +54,5 @@ export function NavBar ({ match }) {
     </Container>
   )
 }
+
+NavBar.displayName = 'NavBar'
