@@ -1,5 +1,6 @@
 import { useState, Children } from "react";
 import PropTypes from 'prop-types'
+import { useStore } from "../../Store";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -27,11 +28,15 @@ export function LocationDropDown({
     buttonLabel = 'Open Select',
     selectLabel = 'Select'
 }) {
+  const { fetchWeather, dispatch } = useStore();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const handleChange = (event) => {
-    setLocation(event.target.value);
+  const handleChange = (e) => {
+    if (e.target.value) {
+            setLocation(event.target.value);
+            // dispatch(fetchWeather(event.target.value));
+    }   
   };
 
   const handleClose = () => {
@@ -44,7 +49,7 @@ export function LocationDropDown({
 
   const createDropDownItems = (list) => {
     return Children.toArray(
-      list.map(({ name, value }) => <MenuItem value={value}>{name}</MenuItem>)
+      list.map((location) => <MenuItem value={location.city}>{location.city}</MenuItem>)
     );
   }
 
@@ -64,9 +69,6 @@ export function LocationDropDown({
           value={location}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {createDropDownItems(locationList)}
         </Select>
       </FormControl>

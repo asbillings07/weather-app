@@ -1,6 +1,7 @@
 import { api } from './request'
 import { buildWeatherApi, buildLocationApi } from './config'
 import { loadState, saveState } from './localStorage'
+import { mapLocationData, parseWeatherData } from "../utils";
 
 const ERROR = 'ERROR'
 const GET_WEATHER = "GET_WEATHER";
@@ -83,18 +84,17 @@ const errorMessage = 'ooops, looks like an error happened!'
 export const fetchWeather = ( location = 'Atlanta') => async (dispatch) => {
   dispatch({ type: LOADING })
 
-  const weatherState = loadState()
-  if (weatherState && weatherState.city.name) {
-    if (weatherState.city.name === location) {
-        dispatch({ type: GET_WEATHER, payload: { weather: weatherState } })
-    }
+  const weather = loadState('weatherData')
+  if (weather && weather.city.name === location) {
+    dispatch({ type: GET_WEATHER, payload: { weather: weather } });
   } else {
     try {
-        const res = await api(buildWeatherApi(location))
-        saveState(res.data)
-        dispatch({ type: GET_WEATHER, payload: { weather: res.data } })
+      const res = await api(buildWeatherApi(location));
+      const weather = parseWeatherData(res.data);
+      saveState("weatherData", weather);
+      dispatch({ type: GET_WEATHER, payload: { weather } });
     } catch (err) {
-        dispatch({ type: ERROR, payload: { error: errorMessage } })
+      dispatch({ type: ERROR, payload: { error: errorMessage } });
     }
   }
 
@@ -105,7 +105,7 @@ export const fetchUserLocation = ({ latitude, longitude }) =>
     dispatch({ type: LOADING });
     try {
       const res = await api(buildLocationApi({ latitude, longitude }));
-      dispatch({ type: GET_LOCATION, payload: { location: res.data.postalCodes } });
+      dispatch({ type: GET_LOCATION, payload: { location: mapLocationData(res.data.postalCodes) } });
     } catch (err) {
       dispatch({ type: ERROR, payload: { error: errorMessage } });
     }

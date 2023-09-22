@@ -1,36 +1,40 @@
-import PropTypes from 'prop-types'
 import { useState } from 'react'
 import { useStore } from '../Store'
 import { LocationDropDown } from './reusables/DropDown'
 import { Typography } from '@material-ui/core'
+import { SkeletonLoader } from './reusables/SkeletonLoader'
 import styled from 'styled-components'
 import { Input } from './reusables/Input'
-import { getMonthDay, roundValue } from '../helperFunctions/functions'
 import { getWeatherIcon } from './reusables/Icons'
 
 export const Today = () => {
-  const [location, setLocation] = useState('Atlanta');
-  const { state } = useStore()
-  console.log(state.location)
+  const { state, defaultCity, location, setLocation } = useStore();
+  console.log(state.weather)
   const weatherData = state.weather
-  const today = weatherData.list[0]
-  const weather = today.weather[0]
+  const today = weatherData?.forecast[0]
+  const weather = today?.weather
   return (
     <Container>
       <WeatherTemps>
-        <TodayDate data-testid="todayDate" variant="h3">
-          Today, {getMonthDay(today.dt)}
-        </TodayDate>
+        <SkeletonLoader loading={state.loading}>
+          <TodayDate data-testid="todayDate" variant="h3">
+            Today, {today?.month}
+          </TodayDate>
+        </SkeletonLoader>
         <Location data-testid="location">
-          <LocationDropDown
-            location={location}
-            buttonLabel={`Current Location: ${location}`}
-            selectLabel="location"
-            setLocation={setLocation}
-            locationList={[]}
-          />
+          {Array.isArray(state.location) &&
+          state.location[0].city !== defaultCity ? (
+            <LocationDropDown
+              location={location}
+              buttonLabel={`Current Location: ${location}`}
+              selectLabel="location"
+              setLocation={setLocation}
+              locationList={state.location}
+            />
+          ) : (
+            <SkeletonBaseLoader></SkeletonBaseLoader>
+          )}
         </Location>
-
         {/* <Input
           placeholder="Enter zip code or city"
           label="Location:"
@@ -41,20 +45,16 @@ export const Today = () => {
           errorMessage="Name field can not be submitted when empty"
           onChange={(e) => setLocation(e.target.value)}
         /> */}
-        <MaxDegrees data-testid="maxDegrees">{`${roundValue(
-          today.temp.max
-        )}\u00b0`}</MaxDegrees>
-        <MinDegrees data-testid="minDegrees">{`${roundValue(
-          today.temp.min
-        )}\u00b0`}</MinDegrees>
+        <MaxDegrees data-testid="maxDegrees">{`${today?.temp?.maxTemp}\u00b0`}</MaxDegrees>
+        <MinDegrees data-testid="minDegrees">{`${today?.temp?.minTemp}\u00b0`}</MinDegrees>
       </WeatherTemps>
       <WeatherForecast>
         <WeatherIcon
           data-testid="weatherIcon"
-          src={getWeatherIcon(weather.icon)}
-          alt={weather.description}
+          src={getWeatherIcon(weather?.icon)}
+          alt={weather?.description}
         />
-        <Forecast data-testid="forecast">{weather.main}</Forecast>
+        <Forecast data-testid="forecast">{weather?.main}</Forecast>
       </WeatherForecast>
     </Container>
   );
@@ -69,6 +69,28 @@ const Container = styled.div`
   @media (min-width: 768px) {
     padding-left: 168px;
   }
+`
+const SkeletonBaseLoader = styled.div`
+  animation: skeleton-loading 1s linear infinite alternate;
+
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }
+
+  width: 52%;
+  height: 1.7rem;
+  border-radius: 0.25rem;
+`;
+const SkeletonText = styled(SkeletonBaseLoader)` 
+  width: 100%;
+  height: 0.7rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
 `
 const WeatherTemps = styled.div`
   width: 48%;
@@ -124,8 +146,5 @@ const Forecast = styled(Typography)`
     font-size: 5em;
   }
 `
-// proptypes
-Today.propTypes = {
-  weatherData: PropTypes.object.isRequired
-}
+
 Today.displayName = 'Today'

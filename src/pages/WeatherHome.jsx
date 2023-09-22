@@ -8,14 +8,14 @@ export const WeatherHome = () => {
   const { state } = useStore()
   return (
     <>
-      {state.weather ? (
-        <>
-          <Today weatherData={state.weather} className='Today'/>
-          <Forecast weatherData={state.weather.list} className='Forecast' />
-        </>
-      ) : (
+      {state.loading ? (
         <Progress />
+      ) : (
+        <>
+          <Today className="Today" />
+          <Forecast className="Forecast" />
+        </>
       )}
     </>
-  )
+  );
 }

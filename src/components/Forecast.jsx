@@ -2,32 +2,44 @@ import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
-import { getWeekDay, roundValue } from '../helperFunctions/functions'
+import { useStore } from '../Store'
 import { getWeatherIcon } from './reusables/Icons'
 
-export const Forecast = ({ weatherData }) => {
+export const Forecast = () => {
+  const { state } = useStore()
   const history = useHistory()
-
-  return weatherData.map((forcast, i) => (
+  return state.weather?.forecast?.map((forecast, i) => (
     <Container key={i} onClick={() => history.push(`/details/${i}`)}>
       <ForecastWrapper>
         <StatusWrapper>
-          <WeekDay data-testid='weekDay' variant='h3'>
-            {i === 0 ? 'Tomorrow' : getWeekDay(forcast.dt)}
+          <WeekDay data-testid="weekDay" variant="h3">
+            {forecast.weekday}
           </WeekDay>
-          <WeatherStatus data-testid='weatherStatus' variant='h5'>
-            {forcast.weather[0].main}
+          <WeatherStatus data-testid="weatherStatus" variant="h5">
+            {forecast.weather.status}
           </WeatherStatus>
         </StatusWrapper>
-        <WeatherImage data-testid='weatherImage' src={getWeatherIcon(forcast.weather[0].icon)} alt={forcast.weather[0].description} />
+        <WeatherImage
+          data-testid="weatherImage"
+          src={getWeatherIcon(forecast.weather.icon)}
+          alt={forecast.weather.description}
+        />
       </ForecastWrapper>
       <TempWrapper>
-        <MaxTemp data-testid='maxTemp' variant='h3'>{`${roundValue(forcast.temp.max)}\u00b0`}</MaxTemp>
-        <MinTemp data-testid='minTemp' variant='h5'>{`${roundValue(forcast.temp.min)}\u00b0`}</MinTemp>
+        <MaxTemp
+          data-testid="maxTemp"
+          variant="h3"
+        >{`${forecast.temp.maxTemp}\u00b0`}</MaxTemp>
+        <MinTemp
+          data-testid="minTemp"
+          variant="h5"
+        >{`${forecast.temp.minTemp}\u00b0`}</MinTemp>
       </TempWrapper>
     </Container>
-  ))
+  ));
 }
+
+Forecast.displayName = "Forecast";
 
 const Container = styled.div`
   display: flex;
@@ -94,7 +106,3 @@ const MinTemp = styled(Typography)`
   }
 `
 
-Forecast.propTypes = {
-  weatherData: PropTypes.array.isRequired
-}
-Forecast.displayName = 'Forecast'
