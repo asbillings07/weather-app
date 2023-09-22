@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import { getMonthDay, getWeekDay, degToCompass, roundValue } from '../helperFunctions/functions'
 import { getWeatherIcon } from './reusables/Icons'
 
 export const Detail = ({ weatherDetails, match }) => {
+  const history = useHistory()
   const { id } = match.params
 
   const getDay = (id, day) => {
@@ -16,6 +18,9 @@ export const Detail = ({ weatherDetails, match }) => {
 
   return (
     <Container>
+      <button onClick={() => history.push('/')}>
+        back
+      </button>
       <DateWrapper>
         <Today data-testid='today' variant='h4'>
           {getDay(id, details.dt)}
