@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
@@ -8,7 +7,9 @@ import { getWeatherIcon } from './reusables/Icons'
 export const Forecast = () => {
   const { state } = useStore()
   const history = useHistory()
-  return state.weather?.forecast?.map((forecast, i) => (
+  return (
+    <ForecastContainer>
+      {state.weather?.forecast?.map((forecast, i) => (
     <Container key={i} onClick={() => history.push(`/details/${i}`)}>
       <ForecastWrapper>
         <StatusWrapper>
@@ -36,7 +37,9 @@ export const Forecast = () => {
         >{`${forecast.temp.minTemp}\u00b0`}</MinTemp>
       </TempWrapper>
     </Container>
-  ));
+  ))}
+    </ForecastContainer>
+  )
 }
 
 Forecast.displayName = "Forecast";
@@ -50,6 +53,7 @@ const Container = styled.div`
     box-shadow: inset 0px 6px 25px #c1c1c1;
   }
 `
+const ForecastContainer = styled.div``
 const ForecastWrapper = styled.div`
   display: flex;
   width: 60%;

@@ -1,34 +1,51 @@
-import styled from "styled-components";
+import { SkeletonBody, SkeletonLoaderContainer, SkeletonContainer, SkeletonText} from './style'
 import PropTypes from "prop-types";
 
-export const SkeletonLoader = ({ children, loading, ...restProps }) => {
-  return loading ? (
-  <SkeletonBaseLoader {...restProps}>
+export function SkeletonLoader({ children, width, height, ...restProps }) {
+  return (
+    <SkeletonLoaderContainer width={width} height={height} {...restProps}>
+      {children}
+    </SkeletonLoaderContainer>
+  );
+}
+
+SkeletonLoader.Body = function SkeletonBodyLoader({ height, width, ...restProps }) {
+  return (<SkeletonBody height={height} width={width} {...restProps}/>);
+};
+
+SkeletonLoader.Container = function Container({ children, styles }) {
+  return (<SkeletonContainer  styles={styles}>
     {children}
-  </SkeletonBaseLoader>
-  ): (
-    <>
-    {children}
-    </>
-  )
+  </SkeletonContainer>);
+};
+
+SkeletonLoader.Text = function SkeletonTextLoader({ height, width, ...restProps }) {
+  return (
+    <SkeletonText height={height} width={width} {...restProps} />
+  );
 };
 
 SkeletonLoader.propTypes = {
-    children: PropTypes.node,
-    loading: PropTypes.bool
+    children: PropTypes.any,
+    height: PropTypes.string,
+    width: PropTypes.string
 }
 
-const SkeletonBaseLoader = styled.div`
-  animation: skeleton-loading 1s linear infinite alternate;
+SkeletonLoader.Body.propTypes = {
+  children: PropTypes.any,
+  height: PropTypes.string,
+  width: PropTypes.string,
+};
 
-  @keyframes skeleton-loading {
-    0% {
-      background-color: hsl(200, 20%, 80%);
-    }
-    100% {
-      background-color: hsl(200, 20%, 95%);
-    }
-  }
+SkeletonLoader.Text.propTypes = {
+  children: PropTypes.any,
+  height: PropTypes.string,
+  width: PropTypes.string,
+};
 
-  ${({style}) => style};
-`;
+SkeletonLoader.Container.propTypes = {
+  children: PropTypes.any,
+  styles: PropTypes.object,
+  width: PropTypes.string,
+};
+

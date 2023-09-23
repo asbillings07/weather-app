@@ -29,7 +29,7 @@
     "vitest": "^0.34.3"
   },
   "scripts": {
-    "dev": "vite --port 3000",
+    "start": "vite --port 3000",
     "build": "vite build",
     "test": "vitest",
     "preview": "vite preview",

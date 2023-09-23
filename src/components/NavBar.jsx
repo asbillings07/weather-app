@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton'
 import { ArrowBackIos } from '@material-ui/icons'
 import sun from '../images/art_clear.png'
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   flex-grow: 1;
 `
 const MenuButton = styled(IconButton)`
@@ -35,24 +35,33 @@ export function NavBar () {
   const path = history.location.pathname
   const title = path !== '/' ? 'Details' : 'Sunshine'
   return (
-    <Container>
-      <AppBar position='static'>
+    <HeaderContainer>
+      <AppBar position="static">
         <Toolbar>
-          {history.location.pathname !== '/' ? (
-            <MenuButton edge='start' color='inherit' aria-label='back to home' onClick={() => history.push('/')}>
+          {history.location.pathname !== "/" ? (
+            <MenuButton
+              edge="start"
+              color="inherit"
+              aria-label="back to home"
+              onClick={() => history.push("/")}
+            >
               <ArrowBackIos />
             </MenuButton>
           ) : (
-            ''
+            ""
           )}
-          <SunImage src={sun} alt='sunshine' />
-          <Title data-testid='appTitle' primary={path !== '/' ? '' : 'true'} variant='h6'>
+          <SunImage src={sun} alt="sunshine" />
+          <Title
+            data-testid="appTitle"
+            primary={path !== "/" ? "" : "true"}
+            variant="h6"
+          >
             {title}
           </Title>
         </Toolbar>
       </AppBar>
-    </Container>
-  )
+    </HeaderContainer>
+  );
 }
 
 NavBar.displayName = 'NavBar'
