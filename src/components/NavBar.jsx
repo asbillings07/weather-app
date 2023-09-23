@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -32,13 +32,15 @@ const Title = styled(Typography)`
 
 export function NavBar () {
   const history = useHistory()
-  const path = history.location.pathname
-  const title = path !== '/' ? 'Details' : 'Sunshine'
+  const location = useLocation()
+  const path = location.pathname
+  const title = location.pathname.includes('details') ? 'Details' : 'Sunshine'
+
   return (
     <HeaderContainer>
       <AppBar position="static">
         <Toolbar>
-          {history.location.pathname !== "/" ? (
+          {location.pathname !== "/" ? (
             <MenuButton
               edge="start"
               color="inherit"

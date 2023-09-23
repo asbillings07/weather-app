@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom'
+import { SkeletonLoader } from './reusables/SkeletonLoader'
 import { Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { useStore } from '../Store'
@@ -7,9 +8,8 @@ import { getWeatherIcon } from './reusables/Icons'
 export const Forecast = () => {
   const { state } = useStore()
   const history = useHistory()
-  return (
-    <ForecastContainer>
-      {state.weather?.forecast?.map((forecast, i) => (
+
+  const forecastElements = state?.weather?.forecast?.map((forecast, i) => (
     <Container key={i} onClick={() => history.push(`/details/${i}`)}>
       <ForecastWrapper>
         <StatusWrapper>
@@ -37,9 +37,30 @@ export const Forecast = () => {
         >{`${forecast.temp.minTemp}\u00b0`}</MinTemp>
       </TempWrapper>
     </Container>
-  ))}
-    </ForecastContainer>
-  )
+  ))
+
+  const skeletonForecastLoader = [1, 2, 3, 4, 5].map((item) => (
+    <SkeletonLoader.Container key={item} display="flex">
+      <SkeletonLoader.Container>
+        <SkeletonLoader.Body />
+        <SkeletonLoader.Body />
+      </SkeletonLoader.Container>
+      <SkeletonLoader.Container>
+        <SkeletonLoader.Body />
+        <SkeletonLoader.Body />
+      </SkeletonLoader.Container>
+    </SkeletonLoader.Container>
+  ));
+
+  return (
+    <>
+      {state?.weather?.forecast && Array.isArray(state.location) ? (
+        <ForecastContainer>{forecastElements}</ForecastContainer>
+      ) : (
+        <SkeletonLoader style={{flexDirection: 'column'}}>{skeletonForecastLoader}</SkeletonLoader>
+      )}
+    </>
+  );
 }
 
 Forecast.displayName = "Forecast";

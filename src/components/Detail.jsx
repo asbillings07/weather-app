@@ -1,29 +1,22 @@
-import PropTypes from 'prop-types'
 import { Typography } from '@material-ui/core'
+import { useRouteMatch } from 'react-router-dom'
+import { useStore } from '../Store'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
-import { getMonthDay, getWeekDay, degToCompass, roundValue } from '../helperFunctions/functions'
+import { roundValue } from '../utils'
 import { getWeatherIcon } from './reusables/Icons'
 
-export const Detail = ({ weatherDetails, match }) => {
-  const history = useHistory()
+export const Detail = () => {
+  const { state } = useStore()
+  const match = useRouteMatch();
   const { id } = match.params
 
-  const getDay = (id, day) => {
-    // using unary operator to cast as number
-    return +id === 0 ? 'Today' : +id === 1 ? 'Tomorrow' : getWeekDay(day)
-  }
-
-  const details = weatherDetails[id]
+  const details = state.weather.forecast[id]
 
   return (
     <Container>
-      <button onClick={() => history.push('/')}>
-        back
-      </button>
       <DateWrapper>
         <Today data-testid='today' variant='h4'>
-          {details.weekDay}
+          {details.weekday}s
         </Today>
         <MonthDate data-testid='monthDate' variant='h5'>
           {details.month}
@@ -161,8 +154,4 @@ const Wind = styled(Typography)`
   }
 `
 
-Detail.propTypes = {
-  weatherDetails: PropTypes.array.isRequired,
-  match: PropTypes.object.isRequired
-}
 Detail.displayName = 'Detail'

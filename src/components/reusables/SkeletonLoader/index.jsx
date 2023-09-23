@@ -13,8 +13,8 @@ SkeletonLoader.Body = function SkeletonBodyLoader({ height, width, ...restProps 
   return (<SkeletonBody height={height} width={width} {...restProps}/>);
 };
 
-SkeletonLoader.Container = function Container({ children, styles }) {
-  return (<SkeletonContainer  styles={styles}>
+SkeletonLoader.Container = function Container({ children, styles, ...restProps }) {
+  return (<SkeletonContainer styles={styles} {...restProps}>
     {children}
   </SkeletonContainer>);
 };

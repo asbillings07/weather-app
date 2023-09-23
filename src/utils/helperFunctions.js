@@ -12,6 +12,8 @@ export const getTime = (unix) => {
   return new Intl.DateTimeFormat("en-US", options).format(IsoDate);
 };
 
+
+
 export const getMonthDay = unix => {
   const IsoDate = new Date(unix * 1000)
   const options = { month: 'long', day: 'numeric' }
@@ -21,7 +23,7 @@ export const getMonthDay = unix => {
 export const getWeekDay = unix => {
   const IsoDate = new Date(unix * 1000)
   const options = { weekday: 'long' }
-  return new Intl.DateTimeFormat('en-US', options).format(IsoDate)
+  return  new Intl.DateTimeFormat('en-US', options).format(IsoDate)
 }
 
 export const degToCompass = num => {
@@ -60,7 +62,8 @@ export const mapLocationData = (locationDataArray) => {
 const parseForecast = (forecastList) => {
   return forecastList.map((forecast, i) => ({
     degrees: degToCompass(forecast.deg),
-    weekday: i === 0 ? "Tomorrow" : getWeekDay(forecast.dt),
+    weekday:
+      i === 0 ? "Today" : i === 1 ? "Tomorrow" : getWeekDay(forecast.dt),
     month: getMonthDay(forecast.dt),
     fullDate: getFullDate(forecast.dt),
     feelsLike: forecast.feels_like,
@@ -81,7 +84,7 @@ const parseForecast = (forecastList) => {
     weather: {
       status: forecast.weather[0].main,
       icon: forecast.weather[0].icon,
-      description: forecast.weather[0].description
+      description: forecast.weather[0].description,
     },
   }));
 }
