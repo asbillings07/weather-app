@@ -1,18 +1,23 @@
-import { useState } from 'react'
+
 import { useStore } from '../Store'
-import { LocationDropDown } from './reusables/DropDown'
+import { IconButton } from '@material-ui/core';
+import PersonPinCircleSharpIcon from "@material-ui/icons/PersonPinCircleSharp";
+// import { LocationDropDown } from './reusables/DropDown'
 import { Typography } from '@material-ui/core'
 import { SkeletonLoader } from './reusables/SkeletonLoader'
 import styled from 'styled-components'
-import { Input } from './reusables/Input'
+// import { Input } from './reusables/Input'
 import { getWeatherIcon } from './reusables/Icons'
 
 export const Today = () => {
-  const { state, defaultCity, location, setLocation } = useStore();
+  const { state, location } = useStore();
   console.log('Weather', state.weather)
   const weatherData = state.weather
   const today = weatherData?.forecast[0]
   const weather = today?.weather
+
+
+
   return (
     <>
       {state.weather && Array.isArray(state.location) ? (
@@ -21,15 +26,6 @@ export const Today = () => {
             <TodayDate data-testid="todayDate" variant="h3">
               Today, {today?.month}
             </TodayDate>
-            <Location data-testid="location">
-              <LocationDropDown
-                location={location}
-                buttonLabel={`Current Location: ${location}`}
-                selectLabel="location"
-                setLocation={setLocation}
-                locationList={state.location}
-              />
-            </Location>
             {/* <Input
           placeholder="Enter zip code or city"
           label="Location:"
@@ -40,10 +36,23 @@ export const Today = () => {
           errorMessage="Name field can not be submitted when empty"
           onChange={(e) => setLocation(e.target.value)}
         /> */}
-            <MaxDegrees data-testid="maxDegrees">{`${today?.temp?.maxTemp}\u00b0`}</MaxDegrees>
-            <MinDegrees data-testid="minDegrees">{`${today?.temp?.minTemp}\u00b0`}</MinDegrees>
+            <MaxDegrees data-testid="maxDegrees">{`High: ${today?.temp?.maxTemp}\u00b0`}</MaxDegrees>
+            <MinDegrees data-testid="minDegrees">{`Low: ${today?.temp?.minTemp}\u00b0`}</MinDegrees>
           </WeatherTemps>
           <WeatherForecast>
+            <Location data-testid="location">
+              <IconButton color='inherit'>
+                <PersonPinCircleSharpIcon /> {location}
+              </IconButton>
+
+              {/* <LocationDropDown
+                location={location}
+                buttonLabel={}
+                selectLabel="location"
+                setLocation={setLocation}
+                locationList={state.location}
+              /> */}
+            </Location>
             <WeatherIcon
               data-testid="weatherIcon"
               src={getWeatherIcon(weather?.icon)}
@@ -53,7 +62,9 @@ export const Today = () => {
           </WeatherForecast>
         </TodayContainer>
       ) : (
-        <SkeletonLoader styles={{height:'100%', backgroundColor: "rgb(3, 169, 250)"}}>
+        <SkeletonLoader
+          styles={{ height: "100%", backgroundColor: "rgb(3, 169, 250)" }}
+        >
           <SkeletonLoader.Container>
             <SkeletonLoader.Text height="25px" />
             <SkeletonLoader.Body height="30px" />
@@ -84,7 +95,7 @@ const WeatherTemps = styled.div`
   width: 48%;
 `
 const TodayDate = styled(Typography)`
-  font-size: 17px;
+  font-size: 25px;
   color: #fff;
   @media (min-width: 768px) {
     font-size: 50px;
@@ -92,7 +103,6 @@ const TodayDate = styled(Typography)`
 `
 const Location = styled.div`
   font-size: 15px;
-  margin-left: -6px;
   margin-top: 10px;
   color: #fff;
   @media (min-width: 768px) {
@@ -100,7 +110,7 @@ const Location = styled.div`
   }
 `;
 const MaxDegrees = styled(Typography)`
-  font-size: 54px;
+  font-size: 45px;
   color: #fff;
   @media (min-width: 768px) {
     font-size: 10em;

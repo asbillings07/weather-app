@@ -23,21 +23,21 @@ export const Detail = ({ weatherDetails, match }) => {
       </button>
       <DateWrapper>
         <Today data-testid='today' variant='h4'>
-          {getDay(id, details.dt)}
+          {details.weekDay}
         </Today>
         <MonthDate data-testid='monthDate' variant='h5'>
-          {getMonthDay(details.dt)}
+          {details.month}
         </MonthDate>
       </DateWrapper>
       <MainContent>
         <TempWrapper>
-          <MaxDegrees data-testid='maxDegrees' variant='h1'>{`${roundValue(details.temp.max)}\u00b0`}</MaxDegrees>
-          <MinDegrees data-testid='minDegrees' variant='h3'>{`${roundValue(details.temp.min)}\u00b0`}</MinDegrees>
+          <MaxDegrees data-testid='maxDegrees' variant='h1'>{`${details.temp.maxTemp}\u00b0`}</MaxDegrees>
+          <MinDegrees data-testid='minDegrees' variant='h3'>{`${details.temp.minTemp}\u00b0`}</MinDegrees>
         </TempWrapper>
         <StatusWrapper>
-          <Icon data-testid='icon' src={getWeatherIcon(details.weather[0].icon)} alt={details.weather[0].description} />
+          <Icon data-testid='icon' src={getWeatherIcon(details.weather.icon)} alt={details.weather.description} />
           <Status data-testid='status' variant='h6'>
-            {details.weather[0].main}
+            {details.weather.status}
           </Status>
         </StatusWrapper>
       </MainContent>
@@ -49,7 +49,7 @@ export const Detail = ({ weatherDetails, match }) => {
           Pressure: {details.pressure} hPa
         </Pressure>
         <Wind data-testid='wind' variant='h5'>
-          Wind: {roundValue(details.speed)} km/h {degToCompass(details.deg)}
+          Wind: {roundValue(details.speed)} km/h {details.degrees}
         </Wind>
       </DetailWrapper>
     </Container>
