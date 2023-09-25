@@ -3,10 +3,18 @@ import { useStore } from '../Store'
 import { IconButton } from '@material-ui/core';
 import PersonPinCircleSharpIcon from "@material-ui/icons/PersonPinCircleSharp";
 // import { LocationDropDown } from './reusables/DropDown'
-import { Typography } from '@material-ui/core'
 import { SkeletonLoader } from './reusables/SkeletonLoader'
-import styled from 'styled-components'
-// import { Input } from './reusables/Input'
+import {
+TodayMaxDegrees,
+TodayMinDegrees,
+TodayContainer,
+TodayDate,
+WeatherTemps,
+WeatherForecast,
+Location,
+WeatherIcon,
+Forecast
+} from './componentStyles'
 import { getWeatherIcon } from './reusables/Icons'
 
 export const Today = () => {
@@ -15,8 +23,6 @@ export const Today = () => {
   const weatherData = state.weather
   const today = weatherData?.forecast[0]
   const weather = today?.weather
-
-
 
   return (
     <>
@@ -36,8 +42,8 @@ export const Today = () => {
           errorMessage="Name field can not be submitted when empty"
           onChange={(e) => setLocation(e.target.value)}
         /> */}
-            <MaxDegrees data-testid="maxDegrees">{`High: ${today?.temp?.maxTemp}\u00b0`}</MaxDegrees>
-            <MinDegrees data-testid="minDegrees">{`Low: ${today?.temp?.minTemp}\u00b0`}</MinDegrees>
+            <TodayMaxDegrees fontSize='72px' data-testid="maxDegrees">{`High: ${today?.temp?.maxTemp}\u00b0`}</TodayMaxDegrees>
+            <TodayMinDegrees fontSize='36px' data-testid="minDegrees">{`Low: ${today?.temp?.minTemp}\u00b0`}</TodayMinDegrees>
           </WeatherTemps>
           <WeatherForecast>
             <Location data-testid="location">
@@ -80,69 +86,5 @@ export const Today = () => {
     </>
   );
 }
-
-// Styles
-const TodayContainer = styled.div`
-  background-color: #03a9fa;
-  display: flex;
-  padding: 16px 0px 40px 40px;
-  @media (min-width: 768px) {
-    padding: 16px 168px 40px 40px;
-  }
-`;
-
-const WeatherTemps = styled.div`
-  width: 48%;
-`
-const TodayDate = styled(Typography)`
-  font-size: 25px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 50px;
-  }
-`
-const Location = styled.div`
-  font-size: 15px;
-  margin-top: 10px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 40px;
-  }
-`;
-const MaxDegrees = styled(Typography)`
-  font-size: 45px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 10em;
-  }
-`
-const MinDegrees = styled(Typography)`
-  font-size: 27px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 7em;
-  }
-`
-const WeatherForecast = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-`;
-const WeatherIcon = styled.img`
-  height: 75px;
-  width: 75px;
-  @media (min-width: 768px) {
-    height: 25em;
-    width: 25em;
-  }
-`
-const Forecast = styled(Typography)`
-  font-size: 17px;
-  color: #fff;
-  align-self: center;
-  @media (min-width: 768px) {
-    font-size: 5em;
-  }
-`
 
 Today.displayName = 'Today'

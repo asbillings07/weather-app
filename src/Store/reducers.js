@@ -105,7 +105,9 @@ export const fetchUserLocation = ({ latitude, longitude }) =>
     dispatch({ type: LOADING });
     try {
       const res = await api(buildLocationApi({ latitude, longitude }));
-      dispatch({ type: GET_LOCATION, payload: { location: mapLocationData(res.data.postalCodes) } });
+      const userLocation = mapLocationData(res.data.postalCodes)
+      saveState('userLocation', userLocation)
+      dispatch({ type: GET_LOCATION, payload: { location: userLocation } });
     } catch (err) {
       dispatch({ type: ERROR, payload: { error: errorMessage } });
     }
