@@ -1,73 +1,216 @@
+export const location = [
+  {
+    state_short: "CT",
+    state_long: "Connecticut",
+    county: "009",
+    countryCode: "US",
+    distance: "0",
+    latitude: 41.2965862,
+    longitude: -72.9186097,
+    city: "New Haven",
+    postalCode: "06511",
+  },
+  {
+    state_short: "CT",
+    state_long: "Connecticut",
+    county: "009",
+    countryCode: "US",
+    distance: "0.3409",
+    latitude: 41.299647,
+    longitude: -72.918846,
+    city: "New Haven",
+    postalCode: "06540",
+  },
+  {
+    state_short: "CT",
+    state_long: "Connecticut",
+    county: "009",
+    countryCode: "US",
+    distance: "1.5133",
+    latitude: 41.3081527,
+    longitude: -72.9281578,
+    city: "New Haven",
+    postalCode: "06506",
+  },
+  {
+    state_short: "CT",
+    state_long: "Connecticut",
+    county: "009",
+    countryCode: "US",
+    distance: "1.5133",
+    latitude: 41.3081527,
+    longitude: -72.9281578,
+    city: "New Haven",
+    postalCode: "06535",
+  },
+  {
+    state_short: "CT",
+    state_long: "Connecticut",
+    county: "009",
+    countryCode: "US",
+    distance: "1.5133",
+    latitude: 41.3081527,
+    longitude: -72.9281578,
+    city: "New Haven",
+    postalCode: "06512",
+  },
+];
 export const weatherData = {
-  list: [
+forecast: [
     {
-      dt: 1583773200,
-      sunrise: 1583754921,
-      sunset: 1583797245,
-      temp: { day: 63.12, min: 40.53, max: 63.25, night: 54.88, eve: 56.62, morn: 40.53 },
-      feels_like: { day: 56.32, night: 51.48, eve: 54.05, morn: 34.66 },
-      pressure: 1032,
-      humidity: 56,
-      weather: [{ id: 803, main: 'Clouds', description: 'broken clouds', icon: '04d' }],
-      speed: 10.94,
-      deg: 171,
-      clouds: 56
+        "degrees": "NE",
+        "weekday": "Today",
+        "month": "September 24",
+        "fullDate": "Sunday, September 24, 2023",
+        "feelsLike": {
+            "day": 59.86,
+            "night": 58.5,
+            "eve": 59.81,
+            "morn": 57.65
+        },
+        "gust": 33.26,
+        "humidity": 97,
+        "pressure": 1018,
+        "speed": 14.36,
+        "sunrise": "6:40 AM",
+        "sunset": "6:46 PM",
+        "temp": {
+            "day": 59.65,
+            "evening": 60,
+            "maxTemp": 60,
+            "minTemp": 57,
+            "morning": 58,
+            "night": 59
+        },
+        "weather": {
+            "status": "Rain",
+            "icon": "10d",
+            "description": "light rain"
+        }
     },
     {
-      dt: 1583859600,
-      sunrise: 1583841242,
-      sunset: 1583883692,
-      temp: { day: 60.69, min: 53.69, max: 61.52, night: 55.85, eve: 61.52, morn: 53.69 },
-      feels_like: { day: 56.7, night: 54.59, eve: 60.33, morn: 50.25 },
-      pressure: 1027,
-      humidity: 80,
-      weather: [{ id: 500, main: 'Rain', description: 'light rain', icon: '10d' }],
-      speed: 9.55,
-      deg: 217,
-      clouds: 87,
-      rain: 1.32
+        "degrees": "NE",
+        "weekday": "Tomorrow",
+        "month": "September 25",
+        "fullDate": "Monday, September 25, 2023",
+        "feelsLike": {
+            "day": 54.37,
+            "night": 54.88,
+            "eve": 54.66,
+            "morn": 56.95
+        },
+        "gust": 34.43,
+        "humidity": 95,
+        "pressure": 1021,
+        "speed": 17.56,
+        "sunrise": "6:41 AM",
+        "sunset": "6:45 PM",
+        "temp": {
+            "day": 54.73,
+            "evening": 55,
+            "maxTemp": 59,
+            "minTemp": 54,
+            "morning": 57,
+            "night": 55
+        },
+        "weather": {
+            "status": "Rain",
+            "icon": "10d",
+            "description": "heavy intensity rain"
+        }
     },
     {
-      dt: 1583946000,
-      sunrise: 1583927563,
-      sunset: 1583970138,
-      temp: { day: 64.13, min: 58.14, max: 68.7, night: 61.59, eve: 63.09, morn: 58.14 },
-      feels_like: { day: 63.43, night: 56.84, eve: 62.28, morn: 58.15 },
-      pressure: 1021,
-      humidity: 85,
-      weather: [{ id: 500, main: 'Rain', description: 'light rain', icon: '10d' }],
-      speed: 6.73,
-      deg: 223,
-      clouds: 100,
-      rain: 1.25
+        "degrees": "NE",
+        "weekday": "Tuesday",
+        "month": "September 26",
+        "fullDate": "Tuesday, September 26, 2023",
+        "feelsLike": {
+            "day": 56.37,
+            "night": 45.03,
+            "eve": 56.07,
+            "morn": 53.33
+        },
+        "gust": 29.53,
+        "humidity": 72,
+        "pressure": 1028,
+        "speed": 13.51,
+        "sunrise": "6:42 AM",
+        "sunset": "6:43 PM",
+        "temp": {
+            "day": 57.54,
+            "evening": 58,
+            "maxTemp": 60,
+            "minTemp": 48,
+            "morning": 54,
+            "night": 48
+        },
+        "weather": {
+            "status": "Rain",
+            "icon": "10d",
+            "description": "light rain"
+        }
     },
     {
-      dt: 1584032400,
-      sunrise: 1584013882,
-      sunset: 1584056585,
-      temp: { day: 62.11, min: 59.27, max: 62.11, night: 59.27, eve: 60.6, morn: 59.41 },
-      feels_like: { day: 59.36, night: 59.72, eve: 61, morn: 56.25 },
-      pressure: 1015,
-      humidity: 91,
-      weather: [{ id: 502, main: 'Rain', description: 'heavy intensity rain', icon: '10d' }],
-      speed: 10.36,
-      deg: 230,
-      clouds: 100,
-      rain: 16.4
+        "degrees": "NE",
+        "weekday": "Wednesday",
+        "month": "September 27",
+        "fullDate": "Wednesday, September 27, 2023",
+        "feelsLike": {
+            "day": 60.37,
+            "night": 47.32,
+            "eve": 62.91,
+            "morn": 39.11
+        },
+        "gust": 24.29,
+        "humidity": 48,
+        "pressure": 1027,
+        "speed": 10.2,
+        "sunrise": "6:43 AM",
+        "sunset": "6:41 PM",
+        "temp": {
+            "day": 62.19,
+            "evening": 64,
+            "maxTemp": 65,
+            "minTemp": 44,
+            "morning": 44,
+            "night": 50
+        },
+        "weather": {
+            "status": "Clouds",
+            "icon": "04d",
+            "description": "broken clouds"
+        }
     },
     {
-      dt: 1584118800,
-      sunrise: 1584100202,
-      sunset: 1584143031,
-      temp: { day: 61.09, min: 46.67, max: 61.45, night: 46.67, eve: 55.31, morn: 59.63 },
-      feels_like: { day: 58.19, night: 39.58, eve: 49.08, morn: 60.8 },
-      pressure: 1019,
-      humidity: 75,
-      weather: [{ id: 502, main: 'Rain', description: 'heavy intensity rain', icon: '10d' }],
-      speed: 6.85,
-      deg: 322,
-      clouds: 100,
-      rain: 17.13
+        "degrees": "NE",
+        "weekday": "Thursday",
+        "month": "September 28",
+        "fullDate": "Thursday, September 28, 2023",
+        "feelsLike": {
+            "day": 59.63,
+            "night": 52.81,
+            "eve": 64,
+            "morn": 43.68
+        },
+        "gust": 18.59,
+        "humidity": 60,
+        "pressure": 1026,
+        "speed": 8.01,
+        "sunrise": "6:44 AM",
+        "sunset": "6:39 PM",
+        "temp": {
+            "day": 61.02,
+            "evening": 65,
+            "maxTemp": 67,
+            "minTemp": 47,
+            "morning": 47,
+            "night": 54
+        },
+        "weather": {
+            "status": "Clear",
+            "icon": "01d",
+            "description": "sky is clear"
+        }
     }
-  ]
-}
+]
+};

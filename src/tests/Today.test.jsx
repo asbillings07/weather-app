@@ -2,20 +2,23 @@ import { customRender } from '../setupTests'
 import { describe, it, expect } from 'vitest';
 import { Today } from '../components/Today'
 import { weatherData } from '../mocks/mockData'
-import { getMonthDay } from '../helperFunctions/functions'
 
 describe('Today.jsx', () => {
 it("shows Today's weather information with icon", () => {
   const { getByTestId } = customRender(<Today weatherData={weatherData} />)
 
-  const weatherMain = weatherData.list[0].weather[0]
-  const weatherForcast = weatherData.list[0]
+  const weatherMain = weatherData.forecast[0].weather
+  const weatherForecast = weatherData.forecast[0]
 
-  expect(getByTestId('todayDate').textContent).toBe(`Today, ${getMonthDay(weatherForcast.dt)}`)
-  expect(getByTestId('maxDegrees').textContent).toBe(`${Math.round(weatherForcast.temp.max)}°`)
-  expect(getByTestId('minDegrees').textContent).toBe(`${Math.round(weatherForcast.temp.min)}°`)
+  expect(getByTestId('todayDate').textContent).toBe(`Today, ${weatherForecast.weekday}`)
+  expect(getByTestId("maxDegrees").textContent).toBe(
+    `${Math.round(weatherForecast.temp.max)}°`
+  );
+  expect(getByTestId("minDegrees").textContent).toBe(
+    `${Math.round(weatherForecast.temp.min)}°`
+  );
   expect(getByTestId('weatherIcon').alt).toBe(weatherMain.description)
-  expect(getByTestId('forcast').textContent).toBe(weatherMain.main)
+  expect(getByTestId('forecast').textContent).toBe(weatherMain.main)
 })
 })
 

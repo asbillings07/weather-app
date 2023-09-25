@@ -2,26 +2,47 @@ import { customRender, cleanup } from '../setupTests'
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Detail } from '../components/Detail'
 import { weatherData } from '../mocks/mockData'
-import { degToCompass, getMonthDay } from '../helperFunctions/functions'
 
-vi.mock('react-router-dom', () => ({
-  useHistory: () => ({
-    push: vi.fn()
-  })
-}))
+let matchParam = 0;
+  vi.mock("react-router-dom", () => ({
+    useHistory: () => ({
+      push: vi.fn(),
+    }),
+    useRouteMatch: () => ({
+      params: {
+        id: 0,
+      },
+    }),
+  }));
+  vi.mock("../Store", () => ({
+    useStore: () => ({
+      state: {
+        weather: weatherData,
+      },
+    }),
+  }));
+
 
 describe('Detail.jsx', () => {
 beforeEach(() => {
   cleanup()
+  vi.clearAllMocks();
 })
 
-it('should show detail weather forcast elements', () => {
-  const match = {
-    params: {
-      id: 0
-    }
-  }
-  const { getByTestId } = customRender(<Detail weatherDetails={weatherData.list} match={match} />)
+
+
+it('should show detail weather forecast elements', () => {
+  vi.mock("react-router-dom", () => ({
+    useHistory: () => ({
+      push: vi.fn(),
+    }),
+    useRouteMatch: () => ({
+      params: {
+        id: 0,
+      },
+    }),
+  }));
+  const { getByTestId } = customRender(<Detail forecast={weatherData.forecast} />)
 
   expect(getByTestId('today')).toBeTruthy()
   expect(getByTestId('monthDate')).toBeTruthy()
@@ -35,47 +56,62 @@ it('should show detail weather forcast elements', () => {
 })
 
 it('Detail Page matches Today weather Details', () => {
-  const match = {
-    params: {
-      id: 0
-    }
-  }
-  const { getByTestId } = customRender(<Detail weatherDetails={weatherData.list} match={match} />)
-  const { id } = match.params
-  const weatherMain = weatherData.list[id].weather[0]
-  const forecast = weatherData.list[id]
+  vi.mock("react-router-dom", () => ({
+    useHistory: () => ({
+      push: vi.fn(),
+    }),
+    useRouteMatch: () => ({
+      params: {
+        id: 0,
+      },
+    }),
+  }));
 
-  expect(getByTestId('today').textContent).toBe('Today')
-  expect(getByTestId('monthDate').textContent).toBe(getMonthDay(forecast.dt))
-  expect(getByTestId('maxDegrees').textContent).toBe(`${Math.round(forecast.temp.max)}°`)
-  expect(getByTestId('minDegrees').textContent).toBe(`${Math.round(forecast.temp.min)}°`)
+  const { getByTestId } = customRender(
+    <Detail forecast={weatherData.forecast} />
+  );
+  const weatherMain = weatherData.forecast[1].weather
+  const forecast = weatherData.forecast[1]
+
+  expect(getByTestId('today').textContent).toBe('Tomorrows')
+  expect(getByTestId("monthDate").textContent).toBe(forecast.month);
+  expect(getByTestId('maxDegrees').textContent).toBe(`${forecast.temp.maxTemp}°`)
+  expect(getByTestId('minDegrees').textContent).toBe(`${forecast.temp.minTemp}°`)
   expect(getByTestId('icon').alt).toBe(weatherMain.description)
-  expect(getByTestId('status').textContent).toBe(weatherMain.main)
+  expect(getByTestId('status').textContent).toBe(weatherMain.status)
   expect(getByTestId('humidity').textContent).toBe(`Humidity: ${forecast.humidity}%`)
   expect(getByTestId('pressure').textContent).toBe(`Pressure: ${forecast.pressure} hPa`)
-  expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${degToCompass(forecast.deg)}`)
+  expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${forecast.degrees}`)
 })
 
 it('Detail Page matches Tomorrow weather Details', () => {
-  const match = {
-    params: {
-      id: 1
-    }
-  }
-  const { getByTestId } = customRender(<Detail weatherDetails={weatherData.list} match={match} />)
-  const { id } = match.params
-  const weatherMain = weatherData.list[id].weather[0]
-  const forecast = weatherData.list[id]
+  vi.mock("react-router-dom", () => ({
+    useHistory: () => ({
+      push: vi.fn(),
+    }),
+    useRouteMatch: () => ({
+      params: {
+        id: 1,
+      },
+    }),
+  }));
 
-  expect(getByTestId('today').textContent).toBe('Tomorrow')
-  expect(getByTestId('monthDate').textContent).toBe(getMonthDay(forecast.dt))
-  expect(getByTestId('maxDegrees').textContent).toBe(`${Math.round(forecast.temp.max)}°`)
-  expect(getByTestId('minDegrees').textContent).toBe(`${Math.round(forecast.temp.min)}°`)
+  matchParam = 1;
+  const { getByTestId } = customRender(
+    <Detail forecast={weatherData.forecast} />
+  );
+  const weatherMain = weatherData.forecast[matchParam].weather
+  const forecast = weatherData.forecast[matchParam]
+
+  expect(getByTestId('today').textContent).toBe('Tomorrows')
+  expect(getByTestId("monthDate").textContent).toBe(forecast.month);
+  expect(getByTestId('maxDegrees').textContent).toBe(`${forecast.temp.maxTemp}°`)
+  expect(getByTestId('minDegrees').textContent).toBe(`${forecast.temp.minTemp}°`)
   expect(getByTestId('icon').alt).toBe(weatherMain.description)
-  expect(getByTestId('status').textContent).toBe(weatherMain.main)
+  expect(getByTestId('status').textContent).toBe(weatherMain.status)
   expect(getByTestId('humidity').textContent).toBe(`Humidity: ${forecast.humidity}%`)
   expect(getByTestId('pressure').textContent).toBe(`Pressure: ${forecast.pressure} hPa`)
-  expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${degToCompass(forecast.deg)}`)
+  expect(getByTestId('wind').textContent).toBe(`Wind: ${Math.round(forecast.speed)} km/h ${forecast.degrees}`)
 })
 })
 

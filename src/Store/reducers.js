@@ -32,7 +32,7 @@ export const initialState = {
   errorMessage: null,
   loading: true
 }
-
+const errorMessage = "ooops, looks like an error happened!";
 export const reducer = (state, action) => {
   switch (action.type) {
     case GET_GEO_POSITION:
@@ -71,7 +71,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         error: true,
-        errorMessage: action.payload.error,
+        errorMessage: action?.payload?.error ?? errorMessage,
         loading: false
       }
     default:
@@ -79,7 +79,7 @@ export const reducer = (state, action) => {
   }
 }
 
-const errorMessage = 'ooops, looks like an error happened!'
+
 
 export const fetchWeather = ( location = 'Atlanta') => async (dispatch) => {
   dispatch({ type: LOADING })

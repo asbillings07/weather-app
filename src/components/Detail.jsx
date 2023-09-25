@@ -1,5 +1,5 @@
 import { useRouteMatch } from 'react-router-dom'
-import { useStore } from '../Store'
+import PropTypes from 'prop-types'
 import { roundValue } from '../utils'
 import { getWeatherIcon } from './reusables/Icons'
 import {
@@ -20,12 +20,10 @@ Pressure,
 Wind
 } from './componentStyles'
 
-export const Detail = () => {
-  const { state } = useStore()
+export const Detail = ({ forecast }) => {
   const match = useRouteMatch();
   const { id } = match.params
-
-  const details = state.weather.forecast[id]
+  const details = forecast[id]
 
   return (
     <DetailContainer>
@@ -72,5 +70,8 @@ export const Detail = () => {
       </DetailWrapper>
     </DetailContainer>
   );
+}
+Detail.propTypes = {
+forecast: PropTypes.object.isRequired
 }
 Detail.displayName = "Detail";
