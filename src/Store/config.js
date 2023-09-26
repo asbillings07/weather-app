@@ -12,5 +12,5 @@ export const buildLocationApi = ({
   latitude = "33.8231296",
   longitude = "-84.7904768",
 }) => {
-  return `http://api.geonames.org/findNearbyPostalCodesJSON?lat=${latitude}&lng=${longitude}&username=${USERNAME}`;
+  return `https://secure.geonames.org/findNearbyPostalCodesJSON?lat=${latitude}&lng=${longitude}&username=${USERNAME}`;
 };
