@@ -6,18 +6,15 @@ export const WeatherDetails = () => {
   const { state } = useStore()
   return (
     <>
-    {
-      state?.weather?.forecast ? (
+      {state?.weather?.forecast ? (
         <Detail forecast={state.weather.forecast} />
-      ) :
-      (
-        <SkeletonLoader>
+      ) : (
+        <SkeletonLoader data-testid="Detail-Skeleton-Loader">
           <SkeletonLoader.Body />
         </SkeletonLoader>
-      )
-    }
+      )}
     </>
-  )
+  );
 }
 
 WeatherDetails.propTypes = {

@@ -50,7 +50,11 @@ export const Forecast = () => {
   ));
 
   const skeletonForecastLoader = [1, 2, 3, 4, 5].map((item) => (
-    <SkeletonLoader.Container key={item} display="flex">
+    <SkeletonLoader.Container
+      key={item}
+      display="flex"
+      data-testid={`Forecast-Skeleton-Loader-${item}`}
+    >
       <SkeletonLoader.Container>
         <SkeletonLoader.Body />
         <SkeletonLoader.Body />

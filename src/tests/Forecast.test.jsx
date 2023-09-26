@@ -21,7 +21,9 @@ vi.mock('react-router-dom', () => ({
 describe('Forecast.jsx', () => {
 beforeEach(() => {
   cleanup()
+  vi.resetAllMocks();
 })
+
 it('should show 5 day weather forecast', () => {
   const { queryAllByTestId } = customRender(<Forecast weatherData={weatherData.forecast} />)
 
@@ -54,7 +56,7 @@ it('Weather Data matches Json data', () => {
         `${forecast.temp.minTemp}°`
       );
   })
-
 })
+
 
 })

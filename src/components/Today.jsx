@@ -64,14 +64,14 @@ export const Today = () => {
               src={getWeatherIcon(weather?.icon)}
               alt={weather?.description}
             />
-            <Forecast data-testid="forecast">{weather?.main}</Forecast>
+            <Forecast data-testid="forecast">{weather?.status}</Forecast>
           </WeatherForecast>
         </TodayContainer>
       ) : (
         <SkeletonLoader
           styles={{ height: "100%", backgroundColor: "rgb(3, 169, 250)" }}
         >
-          <SkeletonLoader.Container>
+          <SkeletonLoader.Container data-testid='Today-Skeleton-Loader'>
             <SkeletonLoader.Text height="25px" />
             <SkeletonLoader.Body height="30px" />
             <SkeletonLoader.Body height="40px" />
