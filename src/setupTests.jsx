@@ -1,12 +1,18 @@
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
-import { Provider } from './Store'
+import { Provider } from './Store/Context'
+import { weatherData } from './mocks/mockData'
+import { initialState } from './Store/reducers'
+const state = {
+  ...initialState,
+  weather: weatherData
+}
 
 
 function customRender (ui, options) {
-  function Wrapper (props) {
-    return <Provider {...props} />
-  }
+function Wrapper({ children }) {
+  return <Provider value={state}>{children}</Provider>;
+}
   return render(ui, { wrapper: Wrapper, ...options })
 }
 

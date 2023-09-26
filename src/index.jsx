@@ -1,27 +1,39 @@
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { App } from './App'
-import { Provider } from './Store'
+import { Provider } from './Store/Context'
 import * as serviceWorker from './serviceWorker'
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
 
+const colors = {
+  yellow: "#fdd835",
+  blue: "#03A9FA",
+  darkBlue: "#1a237e",
+  white: "#fff",
+  grey: "#646464",
+  orange: "#ff8f00",
+  black: "#000",
+  lightGrey: "#f5f5f5",
+  lightGrey2: "#e3e3e3",
+};
+
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#03A9FA',
-      main: '#03A9FA',
-      dark: '#1a237e',
-      contrastText: '#fff'
+      light: colors.blue,
+      main: colors.blue,
+      dark: colors.darkBlue,
+      contrastText: colors.white
     },
     secondary: {
-      light: '#fdd835',
-      main: '#646464',
-      dark: '#ff8f00',
-      contrastText: '#000'
+      light: colors.yellow,
+      main: colors.grey,
+      dark: colors.orange,
+      contrastText: colors.black
     },
-    common: { black: '#000', white: '#fff' },
-    grey: { light: '#f5f5f5', main: '#e3e3e3' }
+    common: { black: colors.black, white: colors.white },
+    grey: { light: colors.lightGrey, main: colors.lightGrey2 }
   }
 })
 

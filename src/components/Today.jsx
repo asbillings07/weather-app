@@ -1,86 +1,98 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { Typography } from '@material-ui/core'
-import styled from 'styled-components'
-import { getMonthDay, roundValue } from '../helperFunctions/functions'
+
+import { useStore } from '../Store'
+import { IconButton } from '@material-ui/core';
+import PersonPinCircleSharpIcon from "@material-ui/icons/PersonPinCircleSharp";
+// import { LocationDropDown } from './reusables/DropDown'
+import { SkeletonLoader } from './reusables/SkeletonLoader'
+import {
+TodayMaxDegrees,
+TodayMinDegrees,
+TodayContainer,
+TodayDate,
+WeatherTemps,
+WeatherForecast,
+Location,
+WeatherIcon,
+TodayForecast
+} from './componentStyles'
 import { getWeatherIcon } from './reusables/Icons'
 
-export const Today = ({ weatherData }) => {
-  const today = weatherData.list[0]
-  const weather = today.weather[0]
+export const Today = () => {
+  const { state, location } = useStore();
+  console.log('Weather', state.weather)
+  const weatherData = state.weather
+  const today = weatherData?.forecast[0]
+  const weather = today?.weather
+
   return (
-    <Container>
-      <WeatherTemps>
-        <TodayDate data-testid='todayDate' variant='h3'>
-          Today, {getMonthDay(today.dt)}
-        </TodayDate>
-        <MaxDegrees data-testid='maxDegrees'>{`${roundValue(today.temp.max)}\u00b0`}</MaxDegrees>
-        <MinDegrees data-testid='minDegrees'>{`${roundValue(today.temp.min)}\u00b0`}</MinDegrees>
-      </WeatherTemps>
-      <WeatherForcast>
-        <WeatherIcon data-testid='weatherIcon' src={getWeatherIcon(weather.icon)} alt={weather.description} />
-        <Forcast data-testid='forcast'>{weather.main}</Forcast>
-      </WeatherForcast>
-    </Container>
-  )
+    <>
+      {state.weather && Array.isArray(state.location) ? (
+        <TodayContainer>
+          <WeatherTemps>
+            <TodayDate data-testid="todayDate" variant="h3">
+              Today, {today?.month}
+            </TodayDate>
+            {/* <Input
+          placeholder="Enter zip code or city"
+          label="Location:"
+          domID="location"
+          name="location"
+          initialValue={location}
+          textColor="black"
+          errorMessage="Name field can not be submitted when empty"
+          onChange={(e) => setLocation(e.target.value)}
+        /> */}
+            <TodayMaxDegrees
+              fontSize="72px"
+              data-testid="maxDegrees"
+            >{`High: ${today?.temp?.maxTemp}\u00b0`}</TodayMaxDegrees>
+            <TodayMinDegrees
+              fontSize="36px"
+              data-testid="minDegrees"
+            >{`Low: ${today?.temp?.minTemp}\u00b0`}</TodayMinDegrees>
+          </WeatherTemps>
+          <WeatherForecast>
+            <Location data-testid="location">
+              <IconButton color="inherit">
+                <PersonPinCircleSharpIcon /> {location}
+              </IconButton>
+
+              {/* <LocationDropDown
+                location={location}
+                buttonLabel={}
+                selectLabel="location"
+                setLocation={setLocation}
+                locationList={state.location}
+              /> */}
+            </Location>
+            <WeatherIcon
+              data-testid="weatherIcon"
+              src={getWeatherIcon(weather?.icon)}
+              alt={weather?.description}
+            />
+            <TodayForecast data-testid="forecast">
+              {weather?.status}
+            </TodayForecast>
+          </WeatherForecast>
+        </TodayContainer>
+      ) : (
+        <SkeletonLoader
+          styles={{ height: "100%", backgroundColor: "rgb(3, 169, 250)" }}
+        >
+          <SkeletonLoader.Container data-testid="Today-Skeleton-Loader">
+            <SkeletonLoader.Text height="25px" />
+            <SkeletonLoader.Body height="30px" />
+            <SkeletonLoader.Body height="40px" />
+          </SkeletonLoader.Container>
+          <SkeletonLoader.Container>
+            <SkeletonLoader.Text height="25px" />
+            <SkeletonLoader.Body height="30px" />
+            <SkeletonLoader.Body height="40px" />
+          </SkeletonLoader.Container>
+        </SkeletonLoader>
+      )}
+    </>
+  );
 }
 
-// Styles
-const Container = styled.div`
-  background-color: #03a9fa;
-  display: flex;
-  padding: 16px 0px;
-  padding-left: 45px;
-  @media (min-width: 768px) {
-    padding-left: 168px;
-  }
-`
-const WeatherTemps = styled.div`
-  width: 48%;
-`
-const TodayDate = styled(Typography)`
-  font-size: 17px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 50px;
-  }
-`
-const MaxDegrees = styled(Typography)`
-  font-size: 54px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 10em;
-  }
-`
-const MinDegrees = styled(Typography)`
-  font-size: 27px;
-  color: #fff;
-  @media (min-width: 768px) {
-    font-size: 7em;
-  }
-`
-const WeatherForcast = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
-const WeatherIcon = styled.img`
-  height: 75px;
-  width: 75px;
-  @media (min-width: 768px) {
-    height: 25em;
-    width: 25em;
-  }
-`
-const Forcast = styled(Typography)`
-  font-size: 17px;
-  color: #fff;
-  align-self: center;
-  @media (min-width: 768px) {
-    font-size: 5em;
-  }
-`
-// proptypes
-Today.propTypes = {
-  weatherData: PropTypes.object.isRequired
-}
+Today.displayName = 'Today'
