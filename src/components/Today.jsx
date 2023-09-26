@@ -13,7 +13,7 @@ WeatherTemps,
 WeatherForecast,
 Location,
 WeatherIcon,
-Forecast
+TodayForecast
 } from './componentStyles'
 import { getWeatherIcon } from './reusables/Icons'
 
@@ -42,12 +42,18 @@ export const Today = () => {
           errorMessage="Name field can not be submitted when empty"
           onChange={(e) => setLocation(e.target.value)}
         /> */}
-            <TodayMaxDegrees fontSize='72px' data-testid="maxDegrees">{`High: ${today?.temp?.maxTemp}\u00b0`}</TodayMaxDegrees>
-            <TodayMinDegrees fontSize='36px' data-testid="minDegrees">{`Low: ${today?.temp?.minTemp}\u00b0`}</TodayMinDegrees>
+            <TodayMaxDegrees
+              fontSize="72px"
+              data-testid="maxDegrees"
+            >{`High: ${today?.temp?.maxTemp}\u00b0`}</TodayMaxDegrees>
+            <TodayMinDegrees
+              fontSize="36px"
+              data-testid="minDegrees"
+            >{`Low: ${today?.temp?.minTemp}\u00b0`}</TodayMinDegrees>
           </WeatherTemps>
           <WeatherForecast>
             <Location data-testid="location">
-              <IconButton color='inherit'>
+              <IconButton color="inherit">
                 <PersonPinCircleSharpIcon /> {location}
               </IconButton>
 
@@ -64,14 +70,16 @@ export const Today = () => {
               src={getWeatherIcon(weather?.icon)}
               alt={weather?.description}
             />
-            <Forecast data-testid="forecast">{weather?.status}</Forecast>
+            <TodayForecast data-testid="forecast">
+              {weather?.status}
+            </TodayForecast>
           </WeatherForecast>
         </TodayContainer>
       ) : (
         <SkeletonLoader
           styles={{ height: "100%", backgroundColor: "rgb(3, 169, 250)" }}
         >
-          <SkeletonLoader.Container data-testid='Today-Skeleton-Loader'>
+          <SkeletonLoader.Container data-testid="Today-Skeleton-Loader">
             <SkeletonLoader.Text height="25px" />
             <SkeletonLoader.Body height="30px" />
             <SkeletonLoader.Body height="40px" />
