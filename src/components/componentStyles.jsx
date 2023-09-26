@@ -280,10 +280,11 @@ export const WeatherIcon = styled.img`
 `};
 
 `;
-export const Forecast = styled(Typography)`
+export const TodayForecast = styled(Typography)`
   font-size: 17px;
   color: #fff;
-  align-self: center;
+  align-self: start;
+  margin-left: 1em;
   ${above.med`
     font-size: 5em;
 `};
