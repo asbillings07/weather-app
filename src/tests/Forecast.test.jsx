@@ -50,10 +50,10 @@ it('Weather Data matches Json data', () => {
 
   weatherForecast.forEach((forecast, i) => {
       expect(queryAllByTestId("maxTemp")[i].textContent).toBe(
-        `${forecast.temp.maxTemp}°`
+        `${forecast.temp.maxTemp}`
       );
       expect(queryAllByTestId("minTemp")[i].textContent).toBe(
-        `${forecast.temp.minTemp}°`
+        `${forecast.temp.minTemp}`
       );
   })
 })

@@ -19,9 +19,9 @@ export const saveState = (key, data) => {
   }
 }
 
-export const removeState = () => {
+export const removeState = (key) => {
   try {
-    window.localStorage.removeItem('state')
+    window.localStorage.removeItem(key)
   } catch (err) {
     return err
   }

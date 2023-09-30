@@ -10,9 +10,10 @@ export const HeaderContainer = styled.div`
 export const NavMenuButton = styled(IconButton)`
   margin-right: 4px;
 `;
-export const SunImage = styled.img`
+export const NavBarImage = styled.img`
   width: 5em;
   height: 5em;
+  margin-right: 20px;
   ${above.med`
     width: 144px;
     height: 144px;
@@ -124,7 +125,7 @@ export const Today = styled(Typography)`
 `};
 `;
 export const MonthDate = styled(Typography)`
-  font-size: 12px;
+  font-size: 20px;
   color: #646464;
   ${above.med`
    font-size: 3em;
@@ -133,16 +134,36 @@ export const MonthDate = styled(Typography)`
 
 export const MainContent = styled.div`
   display: flex;
-  margin-left: 25px;
-  margin-bottom: 30px;
-  justify-content: center;
+  padding-bottom: 30px;
+  justify-content: space-between;
 `;
+
+export const SubMainContent = styled.div`
+  display: flex;
+`
 
 // export const DetailTempWrapper = styled.div`
 //   display: flex;
 //   flex-direction: column;
 // `;
+export const FeelsLikeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
 
+`
+export const FeelsLikeTemp = styled.p`
+  font-size: 20px;
+  margin: 5px 0;
+  ${above.med`
+   font-size: 10em;
+`};
+`;
+
+export const FeelsLikeHeader = styled.div` 
+font-size: 20px;
+`
 export const DetailMaxDegrees = styled(Typography)`
   font-size: 72px;
   ${above.med`
@@ -183,7 +204,7 @@ export const Icon = styled.img`
 export const DetailWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 `;
 export const Humidity = styled(Typography)`
   font-size: 17px;
@@ -213,7 +234,7 @@ export const TodayContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  padding: 16px 0px 40px 30px;
+  padding: 16px 0 40px 0;
   ${above.med`
     padding: 16px 168px 40px 40px;
 `};
@@ -224,7 +245,14 @@ export const TodayContainer = styled.div`
 `;
 
 export const WeatherTemps = styled.div`
-  width: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  ${above.small`
+    width: 50%;
+    flex-direction: column;
+    justify-content: flex-start;
+  `}
 `;
 export const TodayDate = styled(Typography)`
   font-size: 25px;
@@ -264,11 +292,12 @@ export const TodayMinDegrees = styled(Typography)`
 `;
 export const WeatherForecast = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: end;
-  margin-left: -1em;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
   ${above.small`
     margin-left: 3em;
+    flex-direction: column;
+    justify-content: start;
 `};
 `;
 export const WeatherIcon = styled.img`
@@ -283,8 +312,11 @@ export const WeatherIcon = styled.img`
 export const TodayForecast = styled(Typography)`
   font-size: 17px;
   color: #fff;
-  align-self: start;
+  align-self: center;
   margin-left: 1em;
+  ${above.small`
+    align-self: start;
+`};
   ${above.med`
     font-size: 5em;
 `};

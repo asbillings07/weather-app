@@ -8,7 +8,6 @@ import {
 TodayMaxDegrees,
 TodayMinDegrees,
 TodayContainer,
-TodayDate,
 WeatherTemps,
 WeatherForecast,
 Location,
@@ -19,7 +18,6 @@ import { getWeatherIcon } from './reusables/Icons'
 
 export const Today = () => {
   const { state, location } = useStore();
-  console.log('Weather', state.weather)
   const weatherData = state.weather
   const today = weatherData?.forecast[0]
   const weather = today?.weather
@@ -29,9 +27,6 @@ export const Today = () => {
       {state.weather && Array.isArray(state.location) ? (
         <TodayContainer>
           <WeatherTemps>
-            <TodayDate data-testid="todayDate" variant="h3">
-              Today, {today?.month}
-            </TodayDate>
             {/* <Input
           placeholder="Enter zip code or city"
           label="Location:"
@@ -45,11 +40,11 @@ export const Today = () => {
             <TodayMaxDegrees
               fontSize="72px"
               data-testid="maxDegrees"
-            >{`High: ${today?.temp?.maxTemp}\u00b0`}</TodayMaxDegrees>
+            >{`High: ${today?.temp?.maxTemp}`}</TodayMaxDegrees>
             <TodayMinDegrees
               fontSize="36px"
               data-testid="minDegrees"
-            >{`Low: ${today?.temp?.minTemp}\u00b0`}</TodayMinDegrees>
+            >{`Low: ${today?.temp?.minTemp}`}</TodayMinDegrees>
           </WeatherTemps>
           <WeatherForecast>
             <Location data-testid="location">

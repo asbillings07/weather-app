@@ -23,7 +23,6 @@ const Provider = ({ children }) => {
   }, [state.geoPosition.coords]);
 
   useEffect(() => {
-          console.log("Is this running?? FETCH WEATHER", city);
           setLocation(city);
           dispatch(fetchWeather(city));
   }, [city])
