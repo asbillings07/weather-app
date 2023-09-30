@@ -40,11 +40,11 @@ export const Forecast = () => {
         <MaxTemp
           data-testid="maxTemp"
           variant="h3"
-        >{`${forecast.temp.maxTemp}\u00b0`}</MaxTemp>
+        >{`${forecast.temp.maxTemp}`}</MaxTemp>
         <MinTemp
           data-testid="minTemp"
           variant="h5"
-        >{`${forecast.temp.minTemp}\u00b0`}</MinTemp>
+        >{`${forecast.temp.minTemp}`}</MinTemp>
       </TempWrapper>
     </ForecastSubContainer>
   ));

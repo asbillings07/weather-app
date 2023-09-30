@@ -104,10 +104,16 @@ export const fetchUserLocation = ({ latitude, longitude }) =>
   async (dispatch) => {
     dispatch({ type: LOADING });
     try {
-      const res = await api(buildLocationApi({ latitude, longitude }));
-      const userLocation = mapLocationData(res.data.postalCodes)
-      saveState('userLocation', userLocation)
-      dispatch({ type: GET_LOCATION, payload: { location: userLocation } });
+      const storedLocation = loadState('userLocation')
+      if (Array.isArray(storedLocation) && storedLocation[0].latitude === latitude && storedLocation[0].longitude === longitude) {
+          dispatch({ type: GET_LOCATION, payload: { location: storedLocation } });
+      } else {
+        const res = await api(buildLocationApi({ latitude, longitude }));
+        const userLocation = mapLocationData(res.data.postalCodes)
+        saveState('userLocation', userLocation)
+        dispatch({ type: GET_LOCATION, payload: { location: userLocation } });
+      }
+
     } catch (err) {
       dispatch({ type: ERROR, payload: { error: errorMessage } });
     }

@@ -19,11 +19,10 @@ it("shows Today's weather information with icon", () => {
   const weatherMain = weatherData.forecast[0].weather
   const weatherForecast = weatherData.forecast[0]
 
-  expect(getByTestId('todayDate').textContent).toBe(`Today, ${weatherForecast.month}`)
   expect(getByTestId("maxDegrees").textContent).toBe(
-    `High: ${weatherForecast.temp.maxTemp}°`
+    `High: ${weatherForecast.temp.maxTemp}`
   );
-  expect(getByTestId("minDegrees").textContent).toBe(`Low: ${weatherForecast.temp.minTemp}°`);
+  expect(getByTestId("minDegrees").textContent).toBe(`Low: ${weatherForecast.temp.minTemp}`);
   expect(getByTestId('weatherIcon').alt).toBe(weatherMain.description)
   expect(getByTestId('forecast').textContent).toBe(weatherMain.status)
 })

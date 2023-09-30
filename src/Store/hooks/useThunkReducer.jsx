@@ -17,7 +17,6 @@ export const useThunkReducer = (reducer, initialState, debug = false) => {
   const thunkDispatch = (action) => {
     if (typeof action === 'function') {
       action(dispatch)
-      console.log('STATE', state)
     } else {
       dispatch(action)
       runDebug(debug, action, state);
