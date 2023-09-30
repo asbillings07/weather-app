@@ -3,11 +3,13 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { ArrowBackIos } from '@material-ui/icons'
 import { useStore } from '../Store'
+import { NavBarIcon } from './reusables/NavBarIcon'
 import sun from '../images/art_clear.png'
+import night from '../images/icons/night.svg'
 import {
 HeaderContainer,
 NavMenuButton,
-SunImage,
+NavBarImage,
 NavBarTitle,
 TodayDate
 } from './componentStyles'
@@ -35,7 +37,7 @@ export function NavBar () {
           ) : (
             ""
           )}
-          <SunImage src={sun} alt="sunshine" />
+          <NavBarIcon />
           <div>
             <NavBarTitle
               data-testid="appTitle"
@@ -44,14 +46,11 @@ export function NavBar () {
             >
               {title}
             </NavBarTitle>
-            {path === '/' ?
-              (
-                <TodayDate data-testid="todayDate" variant="h3">
-                  Today, {today?.month}
-                </TodayDate>
-              ) : null
-            }
-
+            {path === "/" ? (
+              <TodayDate data-testid="todayDate" variant="h3">
+                Today, {today?.month}
+              </TodayDate>
+            ) : null}
           </div>
         </Toolbar>
       </AppBar>

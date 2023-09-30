@@ -10,9 +10,10 @@ export const HeaderContainer = styled.div`
 export const NavMenuButton = styled(IconButton)`
   margin-right: 4px;
 `;
-export const SunImage = styled.img`
+export const NavBarImage = styled.img`
   width: 5em;
   height: 5em;
+  margin-right: 20px;
   ${above.med`
     width: 144px;
     height: 144px;
