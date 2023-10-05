@@ -4,12 +4,9 @@ import Toolbar from '@material-ui/core/Toolbar'
 import { ArrowBackIos } from '@material-ui/icons'
 import { useStore } from '../Store'
 import { NavBarIcon } from './reusables/NavBarIcon'
-import sun from '../images/art_clear.png'
-import night from '../images/icons/night.svg'
 import {
 HeaderContainer,
 NavMenuButton,
-NavBarImage,
 NavBarTitle,
 TodayDate
 } from './componentStyles'
